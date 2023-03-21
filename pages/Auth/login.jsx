@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import React from 'react';
-import { useRef } from 'react';
+import React, {useRef} from 'react';
 import { useAuth } from '../../Hooks/auth';
 
 const login = () => {
