@@ -1,0 +1,1548 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,800&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+:root {
+  --max-width: 1100px;
+  --border-radius: 12px;
+  --display-flex: flex;
+  --background-fond: #000080;
+  --center: center;
+  --border: 1px solid #30A0E0;
+  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
+    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
+    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+
+  --primary-glow: conic-gradient(
+    from 180deg at 50% 50%,
+    #16abff33 0deg,
+    #0885ff33 55deg,
+    #54d6ff33 120deg,
+    #0071ff33 160deg,
+    transparent 360deg
+  );
+  --secondary-glow: radial-gradient(
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0)
+  );
+
+  --tile-start-rgb: 239, 245, 249;
+  --tile-end-rgb: 228, 232, 233;
+  --tile-border: conic-gradient(
+    #00000080,
+    #00000040,
+    #00000030,
+    #00000020,
+    #00000010,
+    #00000010,
+    #00000080
+  );
+
+  --callout-rgb: 238, 240, 241;
+  --callout-border-rgb: 172, 175, 176;
+  --card-rgb: 180, 185, 188;
+  --card-border-rgb: 131, 134, 135;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+
+    --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
+    --secondary-glow: linear-gradient(
+      to bottom right,
+      rgba(1, 65, 255, 0),
+      rgba(1, 65, 255, 0),
+      rgba(1, 65, 255, 0.3)
+    );
+
+    --tile-start-rgb: 2, 13, 46;
+    --tile-end-rgb: 2, 5, 19;
+    --tile-border: conic-gradient(
+      #ffffff80,
+      #ffffff40,
+      #ffffff30,
+      #ffffff20,
+      #ffffff10,
+      #ffffff10,
+      #ffffff80
+    );
+
+    --callout-rgb: 20, 20, 20;
+    --callout-border-rgb: 108, 108, 108;
+    --card-rgb: 100, 100, 100;
+    --card-border-rgb: 200, 200, 200;
+  }
+}
+
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background: #FFFCF7;
+}
+
+
+
+/* navbar style code */
+.navbar {
+  height: 12vh;
+  background: #FEF5E3;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  /* font-size: 0.1em; */
+}
+.navbar .lien{
+  width: 28%;
+  /* border: var(--border); */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.navbar .lien .home_div{
+  text-decoration: none;
+  /* border: 1px solid; */
+  display: flex;
+  width: 25%;
+  align-items: center;
+  justify-content: space-around;
+  color: rgb(0, 0, 0);
+}
+.navbar .lien .home_div .image_div {
+  width: 24%;
+  height: 2.8vh;
+  /* border: 1px solid; */
+}
+.navbar .lien .home_div .image_div .image_home {
+  width: 100%;
+  height: 100%;
+}
+.navbar .lien .profil {
+  display: flex;
+  /* border: 1px solid; */
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  background: white;
+  width: 65%;
+  height: 7.5vh;
+  border-radius: 50px;
+  cursor: pointer;
+  align-items: var(--center);
+  justify-content: space-around;
+}
+.navbar .lien .profil .image {
+  width: 18%;
+  border-radius: 50%;
+  height: 6.3vh;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1.5em;
+  color: white;
+  background: orange;
+}
+.navbar .lien .profil .image p {
+  margin-top: 0.1em;
+}
+.navbar .lien .profil .user_nom {
+  /* border: 1px solid; */
+  width: 70%;
+  text-transform: uppercase;
+}
+.navbar .lien .contact {
+  background: rgb(248, 202, 123);
+  padding: 0.6em 0.8em;
+  border-radius: 30px 0 30px 0;
+  color: white;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+/* Pop up de profil */
+.container_pop {
+  background: white;
+  width: 16%;
+  position: absolute;
+  top: 4.8em;
+  right: 14em;
+  border-radius: 6px;
+}
+.container_pop .pop_up {
+  display: flex;
+  margin: 1em;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  height: 28vh;
+  /* border: 1px solid red; */
+}
+.container_pop .pop_up .pop_card {
+  display: flex;
+  /* border: 1px solid; */
+  justify-content: space-around;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  padding: 0.2em;
+}
+.container_pop .pop_up .pop_card:hover {
+  background: #f6f6f6;
+  border-radius: 5px;
+}
+.container_pop .pop_up .image_pop {
+  width: 10%;
+  height: 2.7vh;
+  /* border: 1px solid; */
+}
+.container_pop .pop_up .image_pop .image {
+  width: 100%;
+  height: 100%;
+}
+.container_pop .pop_up .pop_card .titre {
+  /* border: 1px solid blue; */
+  width: 82%;
+}
+
+
+
+
+
+
+
+
+/* header code style */
+.container_header {
+  /* border-bottom: 2px solid gray; */
+  background: #FEF5E3;
+
+}
+.container_header .card_header {
+  display: flex;
+  /* border: 1px solid; */
+  margin: 0 1.5em;
+  height: 70vh;
+  /* background: red; */
+  align-items: center;
+  justify-content: space-around;
+}
+.container_header .card_header .image_gauche {
+  width: 25%;
+}
+.container_header .card_header .image_gauche .image {
+  width: 100%;
+}
+.container_header .card_header .bienvenu_div {
+  /* border: 1px solid; */
+  height: 33vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 40%;
+}
+.container_header .card_header .bienvenu_div .text_acceuil p {
+  text-transform: uppercase;
+  font-size: 2em;
+  text-align: center;
+  font-weight: bold;
+}
+.container_header .card_header .bienvenu_div .text_acceuil .logo {
+  color: orange;
+}
+.container_header .card_header .bienvenu_div .text_acceuil .span {
+  text-align: center;
+  color: gray;
+  font-size: 0.8em;
+  /* border: 1px solid; */
+}
+.container_header .card_header .bienvenu_div .auth {
+  /* border: 1px solid; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container_header .card_header .bienvenu_div .auth .login {
+  text-decoration: none;
+  /* border: 1px solid; */
+  padding: 0.5em 0.9em;
+  border-radius: 5px;
+  margin-right: 3em;
+  background: var(--background-fond);
+  color: white;
+}
+.container_header .card_header .bienvenu_div .auth .register {
+  padding: 0.4em 0.9em;
+  border-radius: 5px;
+  border: 1px solid #000080;
+  color: var(--background-fond);
+  text-decoration: none;
+}
+.container_header .card_header .image_droite {
+  /* border: 1px solid violet; */
+  width: 25%;
+}
+.container_header .card_header .image_droite .image {
+  width: 100%;
+}
+.container_header .recherche_container {
+  /* border: 1px solid; */
+  /* border-top: 2px solid gray; */
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container_header .recherche_container .recherche_div {
+  width: 55%;
+  /* border: 1px solid; */
+  background: white;
+  padding: 1em 2em;
+  bottom: 0.7em;
+  position: absolute;
+  height: 15vh;
+  border-radius: 3px;
+}
+.container_header .recherche_container .recherche_div label {
+  font-weight: bold;
+}
+.container_header .recherche_container .recherche_div .form_search input {
+  width: 80%;
+  height: 6.2vh;
+  padding-left: 0.8em;
+  margin: 0.1em 0 0.5em 0;
+  outline: none;
+  border: 1px solid gray;
+  border-radius: 4px 0 0 4px;
+}
+.container_header .recherche_container .recherche_div .form_search button {
+  height: 6vh;
+  background: var(--background-fond);
+  border: none;
+  color: white;
+  font-size: 0.9em;
+  cursor: pointer;
+  border-radius: 0 4px 4px 0;
+  width: 20%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Nouvelle sortie de livre code style */
+.container_sortie {
+  margin: 4em 1em 1em 1em;
+  /* border: 1px solid; */
+}
+.container_sortie .sortie_card .titre {
+  /* border: 1px solid; */
+  margin-bottom: 1em;
+}
+.container_sortie .sortie_card .titre p {
+  font-weight: bold;
+  font-size: 1.6em;
+}
+.container_sortie .sortie_card {
+
+}
+.container_sortie .sortie_card .cards_nouvelle {
+  /* display: flex;
+  flex-direction: row;
+  width: 100%;
+  border: 1px solid; */
+  /* align-items: center; */
+  /* justify-content: space-around; */
+}
+.container_sortie .sortie_card .cards_nouvelle .card_sortie {
+  /* border: 1px solid gray; */
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;  
+  border-radius: 5px;
+  width: 95%;
+}
+.swiper-button-prev {
+  width: 10px;
+  height: 10px;
+}
+.swiper-button-prev::after {
+  color: black;
+  /* width: 10px; */
+  /* height: 5vh; */
+  /* background: red; */
+
+  /* border: 1px solid; */
+}
+.swiper-button-next::after {
+  /* color: black; */
+  /* border: 2px solid; */
+  color: black;
+  position: relative;
+  /* height: 5vh; */
+  /* height: 10vh; */
+}
+.container_sortie .sortie_card .cards_nouvelle .card_sortie .image_cover {
+  height: 40vh;
+  overflow: hidden;
+  transition: 1s;
+}
+.container_sortie .sortie_card .cards_nouvelle .card_sortie .image_cover .image {
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+}
+.container_sortie .sortie_card .cards_nouvelle .card_sortie .image_cover .image:hover {
+  transform: scale(1.1);
+  transition: 1s;
+}
+.container_sortie .sortie_card .cards_nouvelle .card_sortie .infos_livre {
+  padding: 0.5em;
+}
+.container_sortie .sortie_card .cards_nouvelle .card_sortie .info_user {
+  /* border: 1px solid; */
+  display: flex;
+  /* height: 8vh; */
+  background: #FEF5E3;
+  padding: 0.2em 0.2em 0.5em 0.2em;
+  justify-content: space-around;
+  align-items: center;
+}
+.container_sortie .sortie_card .cards_nouvelle .card_sortie .info_user .profil_user {
+  width: 80%;
+  display: flex;
+  align-items: center;
+}
+.container_sortie .sortie_card .cards_nouvelle .card_sortie .profil_user .profil {
+  width: 21%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: orange;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 50%;
+  margin-right: 0.5em;
+  height: 6vh;
+}
+.container_sortie .sortie_card .cards_nouvelle .card_sortie .commenter {
+  width: 9%;
+  height: 3.5vh;
+  font-size: 1.5rem;
+  cursor: pointer;
+  /* border: 1px solid; */
+}
+.container_sortie .sortie_card .cards_nouvelle .card_sortie .commenter:hover {
+  color: green;
+}
+
+
+
+
+
+
+
+
+
+/* Liste des livres style code */
+.container_livres {
+
+}
+.container_livres .livres_div {
+
+}
+.container_livres .livres_div h2 {
+  /* border: 1px solid; */
+  width: 40%;
+  font-size: 2em;
+  margin: 1em 0 1em 2.5em;
+}
+.container_livres .livres_div .categories {
+  display: flex;
+  justify-content: space-around;
+  /* border: 1px solid; */
+  background: #FEF5E3;
+  align-items: center;
+  height: 12vh;
+}
+.container_livres .livres_div .categories button {
+  padding: 0.6em 1em;
+  /* border: 1px solid #FEF5E3; */
+  color: black;
+  border-radius: 3px;
+  cursor: pointer;
+  background: white;
+  border: none;
+  transition: 1s;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.container_livres .livres_div .categories button:hover{
+  background: #FEF5E3;
+  color: black;
+  transform: translateY(10);
+  transition: 1s;
+}
+.container_livres .livres_div .categories .active {
+  background: orange;
+  color: white;
+  border: none;
+}
+.container_livres .livres_div .livres_cards {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 50vh;
+  margin: 0 2rem;
+  justify-content: space-around;
+}
+.container_livres .livres_div .livres_cards .cards_livres {
+  width: 18.75%;
+  border-radius: 5px;
+  margin: 1em 0.5em;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px; 
+}
+.container_livres .livres_div .livres_cards .cards_livres .image_cover {
+  height: 40vh;
+  overflow: hidden;
+  transition: 1s;
+  border-radius: 5px 5px 0 0;
+}
+.container_livres .livres_div .livres_cards .cards_livres .image_cover .image {
+  width: 100%;
+  height: 100%;
+}
+.container_livres .livres_div .livres_cards .cards_livres .image_cover .image:hover {
+  transform: scale(1.1);
+  transition: 1s;
+}
+.container_livres .livres_div .livres_cards .cards_livres .info_user {
+  display: flex;
+  justify-content: space-around;
+  padding: 0.2em 0.2em 0.5em 0.2em;
+  align-items: center;
+  background: #FEF5E3;
+}
+.container_livres .livres_div .livres_cards .cards_livres .info_user .profil_user {
+  width: 80%;
+  display: flex;
+  align-items: center;
+}
+.container_livres .livres_div .livres_cards .cards_livres .info_user .profil_user .profil {
+  width: 22%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: orange;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 50%;
+  margin-right: 0.5em;
+  height: 6vh;
+}
+.container_livres .livres_div .livres_cards .cards_livres .categorie_div {
+  height: 8vh;
+  background: rgb(0, 0, 0, 0.25);
+  position: absolute;
+  width: 17.7%;
+  display: flex;
+  align-items: center;
+  color: white;
+  text-transform: uppercase;
+  padding-left: 1em;
+  font-size: 1.1em;
+  transform: translateY(-3.35rem);
+}
+.container_livres .livres_div .livres_cards .cards_livres .info_user .commenter {
+  width: 10%;
+  cursor: pointer;
+  font-size: 1.8em;
+  /* border: 1px solid; */
+  height: 3.5vh;
+}
+.container_livres .livres_div .livres_cards .cards_livres .info_user .commenter:hover {
+  color: green;
+}
+
+
+
+
+
+
+
+.profile_page {
+  display: flex;
+  justify-content: space-between;
+}
+.profile_page main {
+  /* border: 1px solid; */
+  padding: 1em;
+  width: 77%;
+  /* background: rgb(0, 0, 0, 0.1); */
+  /* height: 5vh; */
+}
+.theme {
+  text-decoration: none;
+  color: black;
+  font-size: 1.25em;
+}
+
+
+
+
+
+
+
+
+
+
+/* Bienvenu card */
+.container_bienvenu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: #FEF5E3; */
+  height: 60vh;
+}
+.container_bienvenu .bienvenu_div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* border: 1px solid; */
+  width: 75%;
+}
+.container_bienvenu .bienvenu_div .bienvenue_image {
+  width: 40%;
+  height: 45vh;
+}
+.container_bienvenu .bienvenu_div .bienvenue_image .image {
+  width: 100%;
+  border-radius: 5px;
+  height: 100%;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.container_bienvenu .bienvenu_div .text_bienvenu {
+  width: 55%;
+  /* border: 1px solid; */
+  height: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.container_bienvenu .bienvenu_div .text_bienvenu .text {
+
+}
+
+
+
+
+
+
+
+
+
+
+/* AVis formulaire code style */
+.container_avis_form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 65vh;
+  /* border: 1px solid; */
+}
+.container_avis_form .avis_div {
+  display: flex;
+  width: 60%;
+  justify-content: space-between;
+  /* align-items: center; */
+  /* border: 1px solid; */
+}
+.container_avis_form .avis_div .avis_image {
+  width: 48%;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.container_avis_form .avis_div .avis_image .image {
+  width: 100%;
+  border-radius: 3px;
+  height: 100%;
+}
+.container_avis_form .avis_div .form_div {
+  /* border: 1px solid; */
+  width: 50%;
+}
+.container_avis_form .avis_div .form_div .titre p {
+  /* text-transform: uppercase; */
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin-bottom: 0.5em;
+
+}
+.container_avis_form .avis_div .form_div form input {
+  width: 100%;
+  height: 6.5vh;
+  padding-left: 0.7em;
+  border: 1px solid gray;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  margin-bottom: 1em;
+  outline: none;
+  border-radius: 3px;
+}
+.container_avis_form .avis_div .form_div form textarea {
+  width: 100%;
+  outline: none;
+  border-radius: 3px;
+  padding: 1em;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.container_avis_form .avis_div .form_div form button {
+  border: none;
+  background: orange;
+  font-size: 1em;
+  color: white;
+  border-radius: 3px;
+  padding: 0.5em 1.3em;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* NewSletter code style */
+
+.center_contact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30vh;
+}
+.center_contact .container_contact {
+  width: 85%;
+  height: 19vh;
+  border-radius: 5px;
+  background: black;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.center_contact .container_contact .contact {
+  width: 40%;
+  height: 58%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.center_contact .container_contact .contact .email {
+  font-size: 1.7em;
+  color: white;
+  font-weight: bold;
+}
+.center_contact .container_contact .contact .infos {
+  color: wheat;
+  opacity: 0.5;
+  font-size: 12px;
+}
+.center_contact .container_contact .contact_form{
+  width: 40%;
+  /* border: 2px solid blue; */
+}
+.center_contact .container_contact .contact_form input {
+  height: 6.5vh;
+  width: 80%;
+  border-radius: 22px 0 0 22px;
+  padding-left: 1.5em;
+  border: none;
+  outline: none;
+}
+.center_contact .container_contact .contact_form button {
+  background: #FBD146;
+  height: 7vh;
+  cursor: pointer;
+  width: 20%;
+  border-radius: 0 22px 22px 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Les livres de l'user code style */
+.livre_user .intitule {
+  /* border: 1px solid; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 1em;
+}
+.livre_user .intitule .titre {
+  width: 70%;
+  text-transform: uppercase;
+  font-size: 1.2em;
+  /* border: 1px solid; */
+}
+.livre_user .intitule .add_book button {
+  background: orange;
+  border: none;
+  padding: 0.7em 1em;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+
+.container_livre_user {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.container_livre_user .card_user_livre {
+  width: 24.5%;
+  margin-bottom: 1em;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px; 
+  /* border: 1px solid; */
+}
+.container_livre_user .card_user_livre .cover_image {
+  height: 40vh;
+  overflow: hidden;
+  transition: 1s;
+}
+.container_livre_user .card_user_livre .cover_image .image {
+  height: 100%;
+  width: 100%;
+}
+.container_livre_user .card_user_livre .cover_image .image:hover {
+  transform: scale(1.1);
+  transition: 1s;
+}
+.container_livre_user .card_user_livre .categorie_div {
+  height: 7vh;
+  transform: translateY(-2.9em);
+  position: absolute;
+  color: white;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  padding-left: 0.8em;
+  width: 18.1%;
+  background: rgb(0, 0, 0, 0.2);
+}
+.container_livre_user .card_user_livre .info_livre {
+  /* border: 1px solid; */
+  padding: 0.5em;
+}
+.container_livre_user .card_user_livre .info_livre .livre {
+  font-size: 0.8em;
+}
+.container_livre_user .card_user_livre .action_livre {
+  display: flex;
+  justify-content: space-around;
+  /* border: 1px solid; */
+  background: #FEF5E3;
+  height: 7vh;
+  align-items: center;
+  /* margin-bottom: 0.5em; */
+}
+.container_livre_user .card_user_livre .action_livre div {
+  /* border: 1px solid; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.container_livre_user .card_user_livre .action_livre .commenter, .delete {
+  font-size: 1.5em;
+}
+.container_livre_user .card_user_livre .action_livre .commenter:hover {
+  color: green;
+}
+.container_livre_user .card_user_livre .action_livre .delete:hover {
+  color: red;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* liste des avis des utilisateurs */
+.container_avis {
+  background: #FEF5E3;
+  margin-top: 1em;
+}
+.container_avis .titre h2 {
+  text-align: center;
+  padding-top: 0.7em;
+}
+.container_avis .avis_cards {
+  display: flex;
+  height: 50vh;
+  margin: 0 2em;
+  justify-content: space-around;
+  align-items: center;
+}
+.container_avis .avis_cards .avis_card {
+  /* border: 1px solid; */
+  width: 30%;
+  padding: 1em;
+  border-radius: 5px;
+  background: white;
+}
+.container_avis .avis_cards .avis_card .image_div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid; */
+  margin-bottom: 0.5em;
+}
+.container_avis .avis_cards .avis_card .image_div .card_image {
+  height: 10vh;
+  width: 19%;
+  /* border: 1px solid; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.3em;
+  text-transform: uppercase;
+  border-radius: 50%;
+  background: #FEF5E3;
+  color: black;
+}
+.container_avis .avis_cards .avis_card .div_nom {
+  text-align: center;
+}
+.container_avis .avis_cards .avis_card .message_div {
+  /* border: 1px solid; */
+  margin: 0.5em 0;
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+/* Commentaire style code  */
+.commentaire_container {
+  display: flex;
+  background: rgb(0, 0, 0, 0.6);
+  position: fixed;
+  align-items: center;
+  z-index: 1;
+  /* border: 1px solid; */
+  justify-content: center;
+  min-height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* width: 100%; */
+}
+.commentaire_container .commentaire_div {
+  width: 50%;
+  background: white;
+  height: 88vh;
+  border-radius: 5px;
+  /* border: 1px solid; */
+}
+.commentaire_container .commentaire_div .card_livre {  
+  height: 69vh;
+  padding: 1rem 2em;
+  /* border: 1px solid; */
+  overflow-Y: scroll;
+}
+.commentaire_container .commentaire_div .entete {
+  /* border: 1px solid; */
+  display: flex;
+  height: 9vh;
+  background: #f6f6f6;
+  align-items: center;
+  border-radius: 5px;
+  justify-content: space-around;
+}
+.commentaire_container .commentaire_div .comment_div {
+  /* border: 1px solid red; */
+  height: 10vh;
+  /* padding: 0.5em 0; */
+  margin: 0 0.3em;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  /* padding-top: 10px;  */
+}
+.commentaire_container .commentaire_div .comment_div form {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* border: 1px solid; */
+  height: 10vh;
+  width: 100%;
+}
+.commentaire_container .commentaire_div .comment_div form textarea {
+  height: 100%;
+  padding: 0.5em;
+  border-radius: 3px;
+  
+  width: 88%;
+}
+.commentaire_container .commentaire_div .comment_div form button {
+  width: 10%;
+  height: 6vh;
+  display: flex;
+  font-size: 2.3em;
+  background: none;
+  cursor: pointer;
+  border: none;
+  align-items: center;
+  justify-content: center;
+}
+.commentaire_container .commentaire_div .entete .pub {
+  /* border: 1px solid; */
+  width: 80%;
+}
+.commentaire_container .commentaire_div .entete .pub p {
+  font-weight: bold;
+  /* color: white; */
+  font-size: 1.2em
+}
+.commentaire_container .commentaire_div .entete .close {
+  /* border: 1px solid; */
+  width: 6%;
+  font-size: 1.2em;
+  cursor: pointer;
+  background: grey;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5.8vh;
+  border-radius: 50%;
+}
+.commentaire_container .commentaire_div .card_livre .header_livre {
+  /* border: 1px solid; */
+  display: flex;
+  /* width: 100%; */
+  justify-content: space-between;
+  align-items: center;
+}
+.commentaire_container .commentaire_div .card_livre .header_livre .profil_photo {
+  width: 8vh;
+  height: 7.8vh;
+  /* border: 1px solid; */
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 1.2em;
+  background: orange;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.commentaire_container .commentaire_div .card_livre .header_livre .user_info {
+  /* border: 1px solid; */
+  width: 89%;
+}
+.commentaire_container .commentaire_div .card_livre .header_livre .user_info span {
+  font-size: 0.8em;
+  color: gray;
+}
+.commentaire_container .commentaire_div .card_livre .contenu_livre .info_livre {
+  /* border: 1px solid; */
+  margin: 0.5em 0;
+  text-transform: uppercase;
+}
+.commentaire_container .commentaire_div .card_livre .contenu_livre .info_livre span {
+  font-weight: bold;
+}
+.commentaire_container .commentaire_div .card_livre .cover_image {
+  height: 85vh;
+  margin: 0.8em 0;
+}
+.commentaire_container .commentaire_div .card_livre .cover_image .image {
+  width: 100%;
+  height: 100%;
+}
+.commentaire_container .commentaire_div .card_livre .liste_commentaire .titre {
+  font-size: 1.2em;
+}
+.commentaire_container .commentaire_div .card_livre .liste_commentaire .card_commentaire {
+  /* border: 1px solid; */
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5em 0;
+}
+.commentaire_container .commentaire_div .card_livre .liste_commentaire .card_commentaire .user_profil {
+  width: 8vh;
+  height: 7.8vh;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 1.2em;
+  background: rgb(216, 203, 179);
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.commentaire_container .commentaire_div .card_livre .liste_commentaire .card_commentaire .messages {
+  width: 90%;
+  padding: 0.5em;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+.commentaire_container .commentaire_div .card_livre .liste_commentaire .card_commentaire .messages span {
+  color: gray;
+  font-size: 0.8em;
+}
+.commentaire_container .commentaire_div .card_livre .liste_commentaire .card_commentaire .messages .message {
+  font-size: 0.9rem;
+}
+
+
+
+
+
+
+
+
+
+
+/* authentification style code */
+.login_form {
+  /* border: 1px solid; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 88vh;
+}
+.login_form form {
+  /* border: 1px solid; */
+  width: 35%;
+  background: white;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  border-radius: 5px;
+  padding: 0.4em 1.5em;
+  /* display: flex;
+  flex-direction: column; */
+  /* align-items: center; */
+}
+.login_form form div {
+  /* border: 1px solid; */
+  display: var(--display-flex);
+  margin: 0.8em 0;
+  flex-direction: column;
+}
+.login_form form div p {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.login_form form div input {
+  height: 6vh;
+  padding-left: 1em;
+  outline: none;
+  border: 1px solid grey;
+  border-radius: 3px;
+}
+.login_form form div label {
+  margin-bottom: 0.3em;
+}
+.login_form form .button{
+  justify-content: right;
+  flex-direction: row;
+  margin-top: 1rem;
+}
+.login_form form .button button {
+  border: none;
+  padding: 0.8em 1.8em;
+  border-radius: 3px;
+  color: white;
+  background: orange;
+  cursor: pointer;
+  transition: 1s;
+}
+.login_form form .button button:hover {
+  background: #FEF5E3;
+  color: black;
+  transition: 1s;
+}
+
+
+
+
+
+
+
+
+
+/* Livre styles */
+.livres_container {
+  /* background: var(--background-fond); */
+  min-height: 88vh;
+}
+.livres_container .search_bar {
+  /* border: 1px solid; */
+  display: var(--display-flex);
+  align-items: var(--center);
+  justify-content: var(--center);
+  height: 12vh;
+  padding-top: 1em;
+}
+.livres_container .search_bar input {
+  width: 38%;
+  height: 7vh;
+  padding-left: 1em;
+  border-radius: 3px 0 0 3px;
+  border: 1px solid gray;
+  outline: none;
+}
+.livres_container .search_bar button {
+  height: 7vh;
+  width: 8%;
+  cursor: pointer;
+  color: white;
+  border: none;
+  background: #006BBB;
+}
+.livres_container .add_livre {
+  /* border: 1px solid; */
+  display: var(--display-flex);
+  justify-content: right;
+  padding-right: 8.5rem;
+  height: 10vh;
+  align-items: var(--center);
+}
+.livres_container .add_livre button {
+  border: none;
+  width: 12%;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  border-radius: 3px;
+  background: white;
+  height: 6vh;
+  cursor: pointer;
+}
+.livres_container .tables_container {
+  display: var(--display-flex);
+  align-items: center;
+  justify-content: var(--center);
+}
+
+
+
+
+
+
+/* tables stylessheet */
+.livres_container .tables_container table {
+  /* border: 1px solid; */
+  border-collapse: collapse;
+  width: 85%;
+  margin-bottom: 1em;
+  background: white;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.livres_container .tables_container table td, th, tr {
+
+  border: 1px solid #f6f6f6;
+  text-align: var(--center);
+  /* width: 15%; */
+}
+.livres_container .tables_container table .id {
+  width: 5%;
+}
+.livres_container .tables_container table .action {
+  width: 30%;
+}
+.livres_container .tables_container table tbody .commenter {
+  text-decoration: none;
+  color: green;
+  padding: 0.2em 0.5em;
+  border-radius: 5px;
+  border: 1px solid rgb(5, 255, 5);
+  /* box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; */
+}
+.livres_container .tables_container table tbody .modifier {
+  /* background:  #FFC872; */
+  padding: 0.2em 0.5em;
+  color: #ff9d00;
+  border-radius: 5px;
+  border: 1px solid black;
+  text-decoration: none;
+  /* box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; */
+}
+.livres_container .tables_container table tbody button {
+  background: red;
+  border: none;
+  cursor: pointer;
+  color: white;
+  padding: 0.4em 0.5em;
+  border-radius: 5px;
+  box-shadow: 1px 0 0 rgb(0, 0, 0);
+}
+
+
+
+/* detail livre styles */
+.container_detail {
+  display: var(--display-flex);
+  justify-content: var(--center);
+  background: var(--background-fond);
+  align-items: var(--center);
+
+}
+.container_detail .card_livre {
+  width: 50%;
+  padding: 1em;
+  /* border: 1px solid; */
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  background: white;
+  border-radius: 5px;
+  margin: 2em 0;
+}
+.container_detail .card_livre .user_infos {
+  /* border: 1px solid; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.container_detail .card_livre .user_infos .photo {
+  width: 10.5%;
+  height: 10vh;
+}
+.container_detail .card_livre .user_infos .photo .image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.container_detail .card_livre .user_infos .data {
+  /* border: var(--border); */
+  width: 88%;
+  height: 7vh;
+}
+.container_detail .card_livre .user_infos .data .nom_prenom {
+  font-weight: bold;
+}
+.container_detail .card_livre .user_infos .data .date {
+  color: gray;
+  font-size: 0.8em;
+  margin-top: 0.4em;
+}
+.container_detail .card_livre .description_livre {
+  /* border: var(--border); */
+  margin: 0.8em 0;
+}
+.container_detail .card_livre .description_livre .livre {
+  /* border: var(--border); */
+  margin-bottom: 0.4em;
+}
+.container_detail .card_livre .description_livre .livre p {
+  text-transform: uppercase;
+}
+.container_detail .card_livre .description_livre .livre p span {
+  font-weight: bold;
+}
+.container_detail .card_livre .image_cover {
+  /* border: var(--border); */
+  height: 70vh;
+  margin-bottom: 0.8em;
+}
+.container_detail .card_livre .image_cover .image {
+  width: 100%;
+  height: 100%;
+}
+.container_detail .card_livre .commentaire_form {
+  /* border: var(--border); */
+  margin-bottom: 0.7em;
+}
+.container_detail .card_livre .commentaire_form form {
+  display: flex;
+  /* border: var(--border); */
+  /* align-items: center; */
+  flex-direction: column;
+}
+.container_detail .card_livre .commentaire_form form div {
+  width: 100%;
+  /* border: 1px solid; */
+}
+.container_detail .card_livre .commentaire_form form textarea {
+  padding: 0.7em;
+  max-width: 100%;
+  min-width: 100%;
+  min-height: 15vh;
+  max-height: 15vh;
+}
+.container_detail .card_livre .commentaire_form form .btn_comment {
+  text-align: right;
+}
+.container_detail .card_livre .commentaire_form form button {
+  background: orange;
+  padding: 0.6em 1em;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+  color: white;
+}
+.container_detail .card_livre .commentaire_liste .card_commentaire {
+  display: var(--display-flex);
+  justify-content: space-between;
+  margin-bottom: 0.3em;
+}
+.container_detail .card_livre .commentaire_liste .card_commentaire .user_profil {
+  width: 7%;
+  height: 7vh;
+}
+.container_detail .card_livre .commentaire_liste .card_commentaire .user_profil .image{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.container_detail .card_livre .commentaire_liste .card_commentaire .comment_user {
+  width: 92%;
+  margin-top: 1.2em;
+  /* border: var(--border); */
+  padding: 0.5em;
+  background: #f6f6f6;
+  border-radius: 10px;
+}
+.container_detail .card_livre .commentaire_liste .card_commentaire .comment_user .nom {
+  font-weight: bold;
+}
+.container_detail .card_livre .commentaire_liste .card_commentaire .comment_user .message {
+  color: gray;
+  font-size: 0.9rem;
+}
+
+
+
+
+
+
+
+/* ajouter livre style */
+.form_add_livre {
+  background: rgb(49, 49, 49, 0.8);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  right: 0;
+  bottom: 0;
+  align-items: center;
+  top: 0;
+  z-index: 100;
+  left: 0;
+  position: fixed;
+}
+.form_add_livre form {
+  padding: 1em;
+  background: white;
+  width: 40%;
+  border-radius: 5px;
+}
+.form_add_livre form div{
+  display: flex;
+  /* border: var(--border); */
+  flex-direction: column;
+  margin-bottom: 0.5em;
+}
+.form_add_livre form .entete {
+  flex-direction: row;
+  justify-content: space-between;
+  text-transform: uppercase;
+  /* border: 1px solid gray; */
+  margin-bottom: 0.6em;
+  font-weight: bold;
+  font-size: 1.3em;
+}
+.form_add_livre form .entete .close {
+  cursor: pointer;
+  padding: 0 0.5em;
+  background: #006BBB;
+  font-weight: normal;
+  color: white;
+  border-radius: 5px;
+}
+.form_add_livre form div input[type='text'], select {
+  height: 6vh;
+  border-radius: 3px;
+  padding-left: 0.8em;
+  border: 1px solid gray;
+}
+.form_add_livre form .add_btn {
+  flex-direction: row;
+  justify-content: right;
+}
+.form_add_livre form .add_btn button {
+  padding: 0.7em 1.5em;
+  background: #006BBB;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+}
+/* body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+} */
+/* 
+a {
+  color: inherit;
+  text-decoration: none;
+} */
+
+/* @media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+} */
+
+
