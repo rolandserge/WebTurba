@@ -37,7 +37,7 @@ const Livres = () => {
                     </div>
                     <div className="livres_cards_listes">
                          {
-                              livres.length > 1 ? livres.slice(0, 10).map((livre, index) => {
+                              livres?.length > 1 ? livres?.slice(0, 10).map((livre, index) => {
 
                                    return (
 

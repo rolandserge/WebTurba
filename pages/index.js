@@ -19,10 +19,7 @@ export default function Home() {
   
   const dispatch =  useDispatch()
   
-  const { data: user, error, mutate} = useSWR("/api/livres/liste-livre", () => 
-          axios.get('/api/livres/liste-livre')
-          .then( response => dispatch(listeLivre(response.data.livres)))
-     )
+
 
     const supprimerLivre = async(id) => {
 
@@ -32,6 +29,7 @@ export default function Home() {
             }
         })
     } 
+
   return (
     <div>
         <section>

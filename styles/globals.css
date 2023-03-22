@@ -582,7 +582,7 @@ body {
   display: flex;
   justify-content: space-between;
 }
-.profile_page main {
+.profile_page section {
   /* border: 1px solid; */
   padding: 1em;
   width: 77%;

@@ -3,6 +3,7 @@ import { useAuth } from '@/Hooks/auth';
 import { useDispatch } from 'react-redux';
 import axios from '@/Lib/axios';
 import { ajoutLivre } from '@/slices/livresSlice';
+import DashbordLayout from '../../../Layout/DashbordLayout';
 
 const AddLivre = ({modal}) => {
 

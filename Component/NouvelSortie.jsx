@@ -57,7 +57,7 @@ const NouvelSortie = () => {
                               className='cards_nouvelle'
                          >
                               {
-                                   livres.map((livre, index) => {
+                                   livres?.map((livre, index) => {
 
                                         return (
                                              <>
