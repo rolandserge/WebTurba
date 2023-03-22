@@ -21,7 +21,7 @@ import DashbordLayout from '../../Layout/DashbordLayout';
 //       ));
 
 
-export default function profile({Children}) {
+export default function profile() {
 
           const [content, setContent] = useState('creer')
 
@@ -35,16 +35,16 @@ export default function profile({Children}) {
      
      return (
         <>
-         {Children}
+          MOn text
         </>
   );
 }
 
-profile.getLayout = function getLayout(profile) {
+profile.getLayout = function getLayout(page) {
 
   return (
         <DashbordLayout>
-          {profile}
+          {page}
       </DashbordLayout>
   )
 }

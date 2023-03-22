@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React from 'react';
 import { BiBookAdd, BiCommentCheck } from "react-icons/bi"
 import { MdLibraryBooks } from "react-icons/md"
 import { TbChartInfographic } from "react-icons/tb"
@@ -145,7 +145,7 @@ const DashbordLayout = ({Children}) => {
                     />
 
                     <Navbar.Section className={classes.section}>
-                        <Link href={"/Profile/Livres/AddLivre"} className={classes.mainLinks}>
+                        <Link href={"/Profil/Livres/AddLivre"} className={classes.mainLinks}>
                               <UnstyledButton className={classes.mainLink}>
                             <div className={classes.mainLinkInner}>
                               <div className={classes.mainLinkIcon}>

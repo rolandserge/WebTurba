@@ -37,15 +37,6 @@ const Header = () => {
                          <Image src={Image2} alt='illustration image' className="image" />
                     </div>
                </div>
-               <div className='recherche_container'>
-                    <div className='recherche_div'>
-                         <label htmlFor="">Faites vos recherches dans cette barre</label>
-                         <div className='form_search'>
-                              <input type="search" placeholder='Entrer vos recherche ici' />
-                              <button>Rechercher</button>
-                         </div>
-                    </div>
-               </div>
           </div>
      );
 };

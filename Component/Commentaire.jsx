@@ -3,16 +3,23 @@ import { BiSend } from "react-icons/bi";
 import Image from "next/image"
 import axios from '@/Lib/axios';
 import { useAuth } from '@/Hooks/auth';
+import useSWR  from 'swr';
 
 
 const Commentaire = ({close, id}) => {
 
     const [livre, setLivre] = useState()
-    const [commentaires, setcommentaires] = useState([])
+    // const [commentaires, setcommentaires] = useState([])
 
     const messageRef = useRef()
 
     const { user } = useAuth()
+
+
+    const { data: commentaire, error, mutate} = useSWR(`/api/livres/show-livre/${id}`, () => 
+            axios.get(`/api/livres/show-livre/${id}`)
+        .then( (response) => response.data.commentaires)
+    )
 
 
     useEffect(() => {
@@ -21,7 +28,7 @@ const Commentaire = ({close, id}) => {
 
             axios.get('/api/livres/show-livre/'+ id).then((res) => {
               setLivre(res.data.livre)
-              setcommentaires(res.data.commentaires)
+              // setcommentaires(res.data.commentaires)
             })
         })()
 
@@ -37,17 +44,19 @@ const Commentaire = ({close, id}) => {
         if(res.data.status == 200) {
           
           // alert(res.data.message)
-          // document.getElementById('message').reset()
+          messageRef.current.value = ''
         }
       })
+      
     }
-
+    // console.log(commentaire);
+    // console.log(livre);
      return (
           <div className='commentaire_container'>
                <div className='commentaire_div'>
                     <div className='entete'>
                          <div className='pub'>
-                              <p>La publication du {livre?.user?.nom + " " + livre?.user?.prenom}</p>
+                              <p>La publication de {livre?.user?.nom + " " + livre?.user?.prenom}</p>
                          </div>
                          <div className='close' onClick={close}>
                               <p>X</p>
@@ -82,13 +91,13 @@ const Commentaire = ({close, id}) => {
                       </div>
                       <div className='liste_commentaire'>
                         {
-                          commentaires.length == 0 ? "Pas de commentaire pour ce livre" :
+                          commentaire?.length == 0 ? "Pas de commentaire pour ce livre" :
                         <>
                           <div className='titre'>
                             <p>Liste des commentaire du livre</p>
                           </div>
                           {
-                            commentaires?.map((commentaire, index) => {
+                            commentaire?.map((commentaire, index) => {
 
                               return (
 

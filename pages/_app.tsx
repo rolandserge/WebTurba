@@ -8,7 +8,7 @@ import { store } from '../store'
 
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
-  getLayout?: (profile: ReactElement) => ReactNode
+  getLayout?: (page: ReactElement) => ReactNode
 }
 
 type AppPropsWithLayout = AppProps & {
@@ -17,7 +17,7 @@ type AppPropsWithLayout = AppProps & {
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
-  const getLayout = Component.getLayout ?? ((profile) => profile)
+  const getLayout = Component.getLayout ?? ((page) => page)
   
   return (
     <Provider store={store}>

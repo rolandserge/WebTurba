@@ -11,23 +11,18 @@ import axios from '@/Lib/axios';
 import { useDispatch } from 'react-redux';
 import NewSletter from "../Component/NewSletter"
 import { deleteLivre, listeLivre } from '@/slices/livresSlice';
+import useSWR  from 'swr';
 
 export default function Home() {
 
-  const [check, setCheck] = useState(false)
-
-  const { user } = useAuth()
+//   const [check, setCheck] = useState(false)
   
   const dispatch =  useDispatch()
   
-
-
-    useEffect(() => {
-        // (async() => {
-            axios.get("/api/livres/liste-livre").then((response) => dispatch(listeLivre(response.data.livres)))
-        // })
-
-    }, [])
+  const { data: user, error, mutate} = useSWR("/api/livres/liste-livre", () => 
+          axios.get('/api/livres/liste-livre')
+          .then( response => dispatch(listeLivre(response.data.livres)))
+     )
 
     const supprimerLivre = async(id) => {
 

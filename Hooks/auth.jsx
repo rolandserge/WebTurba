@@ -58,12 +58,12 @@ export const useAuth = ({middleware} = {}) => {
      const logout = async () => {
 
           try {
-
                await axios.post("/api/logout")
                
                Cookies.remove('token')
 
                mutate(null, false)
+               
                router.push('/Auth/login')
 
           } catch (error) {

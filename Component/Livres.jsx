@@ -3,6 +3,7 @@ import Commentaire from "../Component/Commentaire"
 import CardLivre from "../Component/CardLivre"
 import axios from '@/Lib/axios';
 import { useSelector } from 'react-redux';
+import Link from 'next/link';
 
 const Livres = () => {
 
@@ -10,28 +11,11 @@ const Livres = () => {
 
 
      const [active, setActive] = useState(false)
-     const [change, setChange] = useState()
      const [categories, setCategories] = useState([])
      const [filter, setFilter] = useState(livres)
 
 
-     const changeClasse = (index) => {
-          if(index === change) {
-               return 'active'
-          }
-     }
-     const FilterData = (index) => {
-
-          setChange(index)
-
-          if(index == -1) {
-               const filter = livres.filter((x) => x.id != index)
-               setFilter(filter)
-          } else {
-               const filter = livres.filter((x) => x.categorie_id === index)
-               setFilter(filter)
-          }
-     };
+    
 
 
      useEffect(() => {
@@ -49,22 +33,11 @@ const Livres = () => {
           <div className='container_livres'>
                <div className='livres_div'>
                     <div>
-                         <h2>Collection de nos livres && toutes les categories</h2>
+                         <h2>Quelles que collections de nos livres</h2>
                     </div>
-                    <div className="categories">
-                         <button className={changeClasse(-1)} onClick={() => FilterData(-1)}>Tous</button>
+                    <div className="livres_cards_listes">
                          {
-                              categories.map((categorie, index) => {
-
-                                   return (
-                                        <button key={index} className={changeClasse(categorie.id)} onClick={() => FilterData(categorie.id)}>{categorie.nom}</button>
-                                   )
-                              })
-                         }
-                    </div>
-                    <div className="livres_cards">
-                         {
-                              filter.length > 1 ? filter.slice(0, 10).map((livre, index) => {
+                              livres.length > 1 ? livres.slice(0, 10).map((livre, index) => {
 
                                    return (
 
@@ -74,6 +47,9 @@ const Livres = () => {
 
                               'Aucun livre trouver'
                          }
+                    </div>
+                    <div className='voir_container'>
+                         <Link href={"/Livres"} className='voir'>Plus de livres</Link>
                     </div>
                </div>
                {active && <Commentaire close={() => setActive(false)} /> }
