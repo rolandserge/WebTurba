@@ -7,31 +7,35 @@ import { useAuth } from '../Hooks/auth';
 import Commentaire from './Commentaire';
 import axios from '../Lib/axios';
 import AddLivre from './AddLivre';
+import EditLivre from './EditLivre';
 
 const LivreUser = ({livres}) => {
 
      
      const [active, setActive] = useState(false)
      const [id, setId] = useState()
+     const [add, setAdd] = useState(false)
+     const [idLivre, setIdLivre] = useState()
+     const [update, setUpdate] = useState(false)
+
+
      const { user } = useAuth()
 
-     const [add, setAdd] = useState(false)
 
      const router = useRouter()
 
      const supprimerLivre = async(id) => {
 
-          await axios.delete('/api/livres/delete-livre/'+ id).then((response) => {
-          //     if(response.data.status == 200) {
-          //        alert('Element supprimer avec succes')
-          //     }
-          })
+          await axios.delete('/api/livres/delete-livre/'+ id)
       } 
-
 
      const VoirComment = (id) => {
           setActive(true)
           setId(id)
+     }
+     const ModifierLivre = (id) => {
+          setUpdate(true)
+          setIdLivre(id)
      }
 
      if(active && !user) {
@@ -66,14 +70,14 @@ const LivreUser = ({livres}) => {
                                         }
                                    </div>
                                    <div className='info_livre'>
-                                        <p>{livre.auteur || livre.livre.auteur}</p>
-                                        <p className='livre'>{livre.titre || livre.livre.titre}</p>
+                                        <p className='auteur'>{livre.auteur || livre.livre.auteur}</p>
+                                        <p>{livre.titre || livre.livre.titre}</p>
                                    </div>
                                    <div className='action_livre'>
                                         <div className='commenter' onClick={() => VoirComment(livre.id)}>
                                              <AiOutlineComment />
                                         </div>
-                                        <div className='update'>
+                                        <div className='update' onClick={() => ModifierLivre(livre.id)}>
                                              <GrUpdate />
                                         </div>
                                         <div className='delete' onClick={() => supprimerLivre(livre.id)}>
@@ -86,8 +90,9 @@ const LivreUser = ({livres}) => {
                          })
                     }
                 
-                          { active && user && <Commentaire id={id} close={() => setActive(false)} /> }
-                     { add && <AddLivre close={() => setAdd(false)} /> }
+                    { active && user && <Commentaire id={id} close={() => setActive(false)} /> }
+                    { add && <AddLivre close={() => setAdd(false)} /> }
+                    { update && <EditLivre id={idLivre} close={() => setUpdate(false)} /> }
                </div>
           </div>
      );

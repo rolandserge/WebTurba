@@ -34,7 +34,7 @@ const CardLivre = ({livres}) => {
                          <p>{livres?.categorie.nom}</p>
                     </div>
                     <div className='livre_info'>
-                         <p>{livres?.auteur}</p>
+                         <p className='auteur'>{livres?.auteur}</p>
                          <p>{livres?.titre}</p>
                     </div>
                     <div className='info_user'>

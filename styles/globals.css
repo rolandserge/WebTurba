@@ -279,9 +279,20 @@ body {
   align-items: center;
   justify-content: center;
 }
+.container_header .card_header .bienvenu_div .auth .profile {
+  text-decoration: none;
+  padding: 0.6rem 1.3rem;
+  border-radius: 50px;
+  /* border: 1px solid; */
+  color: white;
+  background: orange;
+}
+.container_header .card_header .bienvenu_div .auth .profile:hover {
+  opacity: 0.7;
+}
 .container_header .card_header .bienvenu_div .auth .login {
   text-decoration: none;
-  /* border: 1px solid; */
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   padding: 0.5em 0.9em;
   border-radius: 5px;
   margin-right: 3em;
@@ -289,9 +300,10 @@ body {
   color: white;
 }
 .container_header .card_header .bienvenu_div .auth .register {
-  padding: 0.4em 0.9em;
+  padding: 0.5em 0.9em;
   border-radius: 5px;
-  border: 1px solid #000080;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  background: white;
   color: var(--background-fond);
   text-decoration: none;
 }
@@ -536,6 +548,13 @@ body {
   padding-left: 1em;
   font-size: 1.1em;
   transform: translateY(-3.35rem);
+}
+.livres_cards_listes .cards_livres .livre_info {
+  padding: 0.5em;
+}
+.livres_cards_listes .cards_livres .livre_info .auteur {
+  color: gray;
+  font-size: 0.85em;
 }
 .livres_cards_listes .cards_livres .info_user .commenter {
   width: 10%;
@@ -850,11 +869,11 @@ body {
   background: rgb(0, 0, 0, 0.2);
 }
 .container_livre_user .card_user_livre .info_livre {
-  /* border: 1px solid; */
   padding: 0.5em;
 }
-.container_livre_user .card_user_livre .info_livre .livre {
-  font-size: 0.8em;
+.container_livre_user .card_user_livre .info_livre .auteur{
+  font-size: 0.85em;
+  color: gray;
 }
 .container_livre_user .card_user_livre .action_livre {
   display: flex;

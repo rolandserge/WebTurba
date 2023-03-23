@@ -20,12 +20,12 @@ const Header = () => {
                               <p>Bienvenue sur <span className='logo'>GesiLivre</span></p>
                               <p className='collection'>Collection de livre en ligne</p>
                               <div className='span'>
-                                   <span>Une plateforme entierement digitalisée dediée aux personnes amoureuses de la lecture !!! Retrouvez les meilleures collections ainsi que la gestion de vos livres ici!</span>
+                                   <span>Une plateforme entierement digitalisée dediée aux personnes amoureuses de la lecture !!! Retrouvez les meilleures collections ainsi que la gestion de vos livres ici</span>
                               </div>
                          </div>
                          <div className='auth'>
                               {
-                                   user ? <Link href={'/Profile'}>Mon profile</Link> : 
+                                   user ? <Link href={'/Livres'} className='profile'>Decouvrez tous les livres</Link> : 
                                    <>
                                         <Link href={'/Auth/login'} className="login">Se conneter</Link>
                                         <Link href={'/Auth/register'} className='register'>S'incrire</Link>

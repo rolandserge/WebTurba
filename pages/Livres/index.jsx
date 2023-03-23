@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import Image from "next/image"
 import CardLivre from "../../Component/CardLivre"
-import useSWR from "swr"
-import axios from '../../Lib/axios';
 import useData from '../../Hooks/data';
 
 const index = () => {
@@ -12,6 +9,7 @@ const index = () => {
      const [change, setChange] = useState()
      
      const [filter, setFilter] = useState(livres)
+     const [search, setSearch] = useState("")
      
      
      const changeClasse = (index) => {
@@ -31,6 +29,14 @@ const index = () => {
                setFilter(filter)
           }
      };
+
+     var keys = ['titre','categorie.nom', 'auteur']
+     
+     const rechercheFiltre = (livres) => {
+          return livres.filter((livre) => keys.some((key) => String(livre[key]).toLowerCase().includes(search.toLowerCase())))
+     }
+
+
      return (
           <div className='lecture_image'>
                <div className="image_livre">
@@ -45,7 +51,7 @@ const index = () => {
                          <div className='recherche_div'>
                               <label htmlFor="">Faites vos recherches dans cette barre</label>
                               <div className='form_search'>
-                                   <input type="search" placeholder='Entrer vos recherche ici' />
+                                   <input type="search" onChange={(event) => setSearch(event.target.value)} placeholder='Entrer vos recherche ici' />
                                    <button>Rechercher</button>
                               </div>
                          </div>
@@ -66,6 +72,15 @@ const index = () => {
                     </div>
                     <div className="livres_cards_listes">
                     {
+                         search ? rechercheFiltre(livres).map((livre, index) => {
+
+                              return (
+                              
+                                   <CardLivre livres={livre} key={index} />
+                              ) 
+                         }) 
+
+                         :
                          typeof filter === 'undefined' ? livres?.map((livre, index) => {
 
                               return (

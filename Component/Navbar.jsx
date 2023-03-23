@@ -31,7 +31,6 @@ const Navbar = () => {
             <div
               className="profil"
               onMouseEnter={() => setActive(true)}
-          // onClick={() => setActive(true)}
             >
               <div className="image">
                 <p>{ user.nom[0] }</p>

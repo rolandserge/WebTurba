@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Livres from "../../Component/livres";
 import { BiBookAdd, BiCommentCheck } from "react-icons/bi"
-import { MdLibraryBooks } from "react-icons/md"
+import { MdLibraryBooks, MdOutlineLogout } from "react-icons/md"
 import { TbChartInfographic } from "react-icons/tb"
 import { createStyles, Navbar, TextInput, Code, UnstyledButton, Badge, Text, Group, ActionIcon, Tooltip, rem} from '@mantine/core';
 import { IconSearch, IconPlus } from '@tabler/icons-react'
@@ -10,6 +10,7 @@ import { useAuth } from '../../Hooks/auth';
 import AddLivre from '../../Component/AddLivre';
 import useData from '../../Hooks/data';
 import AddCategorie from '../../Component/AddCategorie';
+import { useRouter } from 'next/router';
 
 
 const useStyles = createStyles((theme) => ({
@@ -120,9 +121,10 @@ export default function profile() {
         const [content, setContent] = useState("livre")
         const [addCategorie, setAddCategorie] = useState(false)
 
-        const { user, isLoading } = useAuth({middleware : "auth"})
+        const { user, isLoading, logout } = useAuth({middleware : "auth"})
         
         const { livres, commentaires, categories } = useData()
+        const router = useRouter()
 
 
 
@@ -134,14 +136,6 @@ export default function profile() {
 
             return filter
        };
-
-    
-       const FilterDataLivreCommenter = () => {
-
-        const filter = commentaires?.filter((x) => x.user_id === user.id)
-
-        return filter
-      };
   
       if(isLoading || !user) {
 
@@ -162,17 +156,6 @@ export default function profile() {
                           </div>
                         </div>
                     </Navbar.Section>
-
-                    <TextInput
-                    placeholder="Search"
-                    size="xs"
-                    icon={<IconSearch size="0.8rem" stroke={1.5} />}
-                    rightSectionWidth={70}
-                    rightSection={<Code className={classes.searchCode}>Ctrl + K</Code>}
-                    styles={{ rightSection: { pointerEvents: 'none' } }}
-                    mb="sm"
-                    />
-
                     <Navbar.Section className={classes.section}>
                         <div className={classes.mainLinks} onClick={() => setContent('livre')}>
                               <UnstyledButton className={classes.mainLink}>
@@ -187,6 +170,19 @@ export default function profile() {
                             </Badge>
                           </UnstyledButton>
                         </div>
+                        <div className={classes.mainLinks} onClick={() => router.push('/Livres')}>
+                                  <UnstyledButton className={classes.mainLink}>
+                            <div className={classes.mainLinkInner}>
+                              <div className={classes.mainLinkIcon}>
+                                  <BiCommentCheck />
+                              </div>
+                              <p className='theme'>Tous les livres</p>
+                          </div>
+                            <Badge size="sm" variant="filled" className={classes.mainLinkBadge}>
+                              {livres ? Object.keys(livres).length : "Loading ..." }
+                            </Badge>
+                          </UnstyledButton>
+                        </div>
                         <div className={classes.mainLinks} onClick={() => setContent('creer')}>
                                   <UnstyledButton className={classes.mainLink}>
                             <div className={classes.mainLinkInner}>
@@ -195,39 +191,19 @@ export default function profile() {
                               </div>
                               <p className='theme'>Creer un livre</p>
                           </div>
-                            <Badge size="sm" variant="filled" className={classes.mainLinkBadge}>
-                              50
-                            </Badge>
                           </UnstyledButton>
                         </div>
-                        <div className={classes.mainLinks} onClick={() => setContent('commenter')}>
+                        <div className={classes.mainLinks} onClick={logout}>
                                   <UnstyledButton className={classes.mainLink}>
                             <div className={classes.mainLinkInner}>
                               <div className={classes.mainLinkIcon}>
-                                  <BiCommentCheck />
+                                <MdOutlineLogout />
                               </div>
-                              <p className='theme'>Les livres commentés</p>
+                              <p className='theme'>Deconnexion</p>
                           </div>
-                            <Badge size="sm" variant="filled" className={classes.mainLinkBadge}>
-                              { FilterDataLivreCommenter() ? FilterDataLivreCommenter().length : "Loading ..." }
-                            </Badge>
-                          </UnstyledButton>
-                        </div>
-                        <div className={classes.mainLinks} onClick={() => setContent('stats')}>
-                                  <UnstyledButton className={classes.mainLink}>
-                            <div className={classes.mainLinkInner}>
-                              <div className={classes.mainLinkIcon}>
-                                <TbChartInfographic />
-                              </div>
-                              <p className='theme'>Mes Statitisques</p>
-                          </div>
-                            <Badge size="sm" variant="filled" className={classes.mainLinkBadge}>
-                              12
-                            </Badge>
                           </UnstyledButton>
                         </div>
                     </Navbar.Section>
-
                     <Navbar.Section className={classes.section}>
                     <Group className={classes.collectionsHeader} position="apart">
                          <Text size="1.1rem" weight={500} color="dimmed">
@@ -257,8 +233,6 @@ export default function profile() {
           {
             content === "livre" && <LivreUser livres={FilterDataLivre()} /> }
            { content === "creer" && <AddLivre close={() => setContent('livre')} /> }
-           { content === "commenter" &&  <LivreUser livres={FilterDataLivreCommenter()} />}
-           { content === "stats" && <Livres /> }
            { addCategorie && <AddCategorie close={() => setAddCategorie(false)} /> }
           
          </section>
