@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { useAuth } from '@/Hooks/auth';
-import { useDispatch } from 'react-redux';
 import axios from '@/Lib/axios';
-import { ajoutLivre } from '@/slices/livresSlice';
+import useData from '@/Hooks/data';
 
-const AddLivre = ({modal}) => {
+const AddLivre = ({close}) => {
 
      const titreRef = useRef()
      const auteurRef = useRef()
@@ -12,21 +11,8 @@ const AddLivre = ({modal}) => {
      const descriptionRef = useRef()
      const categorieRef = useRef()
 
-     const [categories, setCategories] = useState([])
-
-     const dispatch = useDispatch()
-
      const { user } = useAuth()
-
-     useEffect(() => {
-
-          (async() => {
-
-               const response = await axios.get("/api/categories/liste-categorie")
-
-               setCategories(response.data.categories)
-          })()
-     }, [])
+     const { categories } = useData()
 
      const addLivre = async(e) => {
 
@@ -45,14 +31,17 @@ const AddLivre = ({modal}) => {
           data.append('user', user.id)
           data.append('categorie', categorie)
                
-          await axios.post('/api/livres/add-livre', data).then((response) => 
+          await axios.post('/api/livres/add-livre', data)
+               .then((res) => 
                {    
-                    if (response.data.status == 200) {
+                    if(res.data.status == 200) {
 
-                    dispatch(ajoutLivre(response.data.livre))
-
-               }
-               
+                    titreRef.current.value = ""
+                    auteurRef.current.value = ""
+                    coverRef.current.files[0] = ''
+                    descriptionRef.current.value = ""
+                    categorieRef.current.value = ""
+               } 
           }).catch(error => console.log(error))
      }
 
@@ -61,22 +50,22 @@ const AddLivre = ({modal}) => {
                <form action="" method="post" onSubmit={addLivre}>
                     <div className='entete'>
                          <p>Ajouter un livre</p>
-                         <p className='close' onClick={modal}>X</p>
+                         <p className='close' onClick={close}>X</p>
                     </div>
                     <div>
                          <label htmlFor="">Enter le titre du livre</label>
-                         <input type="text" ref={titreRef} placeholder='Entrer le titre du livre' id="" />
+                         <input type="text" ref={titreRef} required placeholder='Entrer le titre du livre' id="" />
                     </div>
                     <div>
                          <label htmlFor="">Entrer le nom de l'auteur du livre</label>
-                         <input type="text" ref={auteurRef} placeholder="Entrer le nom de l'auteur du livre" />
+                         <input type="text" ref={auteurRef} required placeholder="Entrer le nom de l'auteur du livre" />
                     </div>
                     <div>
                          <label htmlFor="">Selectionner la categorie du livre</label>
-                         <select name="" ref={categorieRef}>
+                         <select name="" ref={categorieRef} required>
                               <option value="">--- selectionner la categorie ---</option>
                               {
-                                   categories.map((categorie, index) => {
+                                   categories?.map((categorie, index) => {
 
                                         return ( 
                                              <option key={index} value={categorie.id}>{categorie.nom}</option>
@@ -89,11 +78,11 @@ const AddLivre = ({modal}) => {
                     </div>
                     <div>
                          <label htmlFor="">Entrer la description du livre</label>
-                         <textarea name="" ref={descriptionRef} cols="30" rows="10"></textarea>
+                         <textarea name="" ref={descriptionRef} cols="30" required placeholder='Entrer la description du livre' rows="10"></textarea>
                     </div>
                     <div>
                          <label htmlFor="">Choisissez la photo de couverture</label>
-                         <input type="file" name="" ref={coverRef}/>
+                         <input type="file" required ref={coverRef}/>
                     </div>
                     <div className='add_btn'>
                          <button>Ajouter le livre</button>
@@ -103,19 +92,5 @@ const AddLivre = ({modal}) => {
      );
 };
 
-//excecuter code cote serveur
-export async function getStaticProps() {
-     // code
-          
-          // const categories = await response.json()
-
-          // console.log(response)
-
-     return {
-          props: {
-               categories: response
-          },
-     }
- }
 export default AddLivre;
 

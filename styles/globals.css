@@ -1292,7 +1292,6 @@ body {
 }
 .form_add_livre form div{
   display: flex;
-  /* border: var(--border); */
   flex-direction: column;
   margin-bottom: 0.5em;
 }
@@ -1300,23 +1299,29 @@ body {
   flex-direction: row;
   justify-content: space-between;
   text-transform: uppercase;
-  /* border: 1px solid gray; */
   margin-bottom: 0.6em;
   font-weight: bold;
   font-size: 1.3em;
 }
 .form_add_livre form .entete .close {
   cursor: pointer;
-  padding: 0 0.5em;
-  background: #006BBB;
+  padding: 0.2em 0.65em;
+  background: grey;
   font-weight: normal;
   color: white;
-  border-radius: 5px;
+  border-radius: 50px;
 }
 .form_add_livre form div input[type='text'], select {
   height: 6vh;
   border-radius: 3px;
   padding-left: 0.8em;
+  border: 1px solid gray;
+}
+.form_add_livre form div textarea {
+  height: 12vh;
+  max-width: 100%;
+  min-width: 100%;
+  padding: 0.8em;
   border: 1px solid gray;
 }
 .form_add_livre form .add_btn {
@@ -1325,7 +1330,7 @@ body {
 }
 .form_add_livre form .add_btn button {
   padding: 0.7em 1.5em;
-  background: #006BBB;
+  background: orange;
   color: white;
   border: none;
   cursor: pointer;
@@ -1351,6 +1356,37 @@ a {
     color-scheme: dark;
   }
 } */
+
+
+
+
+.profil_user_div {
+  /* border: 1px solid; */
+  margin-bottom: 0.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1em;
+}
+.profil_user_div .photo {
+  /* border: 1px solid; */
+  height: 8.5vh;
+  background: lightgray;
+  width: 22%;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+.profil_user_div .nom_prenom {
+  text-align: center;
+  margin-top: 0.5em;
+  text-transform: capitalize;
+}
+
 
 
 

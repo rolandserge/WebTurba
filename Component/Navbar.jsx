@@ -34,10 +34,10 @@ const Navbar = () => {
           // onClick={() => setActive(true)}
             >
               <div className="image">
-                <p>r</p>
+                <p>{ user.nom[0] }</p>
               </div>
               <div className="user_nom">
-                <p>Serge-Roland</p>
+                <p>{user.prenom}</p>
               </div>
             </div>
           </> :

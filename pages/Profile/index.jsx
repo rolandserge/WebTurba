@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Livres from "../../Component/livres";
-import Link from "next/link"
 import { BiBookAdd, BiCommentCheck } from "react-icons/bi"
 import { MdLibraryBooks } from "react-icons/md"
 import { TbChartInfographic } from "react-icons/tb"
@@ -8,13 +7,20 @@ import { createStyles, Navbar, TextInput, Code, UnstyledButton, Badge, Text, Gro
 import { IconSearch, IconPlus } from '@tabler/icons-react'
 import LivreUser from '../../Component/LivreUser';
 import { useAuth } from '../../Hooks/auth';
-import AddLivre from './Livres/AddLivre';
+import AddLivre from '../../Component/AddLivre';
 import useData from '../../Hooks/data';
+import AddCategorie from '../../Component/AddCategorie';
 
 
 const useStyles = createStyles((theme) => ({
   navbar: {
     paddingTop: 0,
+    overflowY: "scroll",
+    minHeight: "88vh",
+    height: "88vh",
+    position: "fixed",
+    top: "5em",
+    zIndex: 1
   },
 
   section: {
@@ -94,8 +100,8 @@ const useStyles = createStyles((theme) => ({
   collectionLink: {
     display: 'block',
     padding: `${rem(8)} ${theme.spacing.xs}`,
-    textDecoration: 'none',
     borderRadius: theme.radius.sm,
+    textTransform: 'capitalize',
     fontSize: theme.fontSizes.xs,
     color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[7],
     lineHeight: 1,
@@ -108,39 +114,17 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const collections = [
-  { emoji: '👍', label: 'Sales' },
-  { emoji: '🚚', label: 'Deliveries' },
-  { emoji: '💸', label: 'Discounts' },
-  { emoji: '💰', label: 'Profits' },
-  { emoji: '✨', label: 'Reports' },
-  { emoji: '🛒', label: 'Orders' },
-  { emoji: '📅', label: 'Events' },
-  { emoji: '🙈', label: 'Debts' },
-  { emoji: '💁‍♀️', label: 'Customers' },
-];
-
-
-// const collectionLinks = collections.map((collection) => (
-//       <a
-//         href="/"
-//           onClick={(event) => event.preventDefault()}
-//           key={collection.label}
-//           className={classes.collectionLink}
-//         >
-//       <span style={{ marginRight: rem(9), fontSize: rem(16) }}>{collection.emoji}</span>{' '}
-//         {collection.label}
-//       </a>
-//       ));
-
 
 export default function profile() {
+  
+        const [content, setContent] = useState("livre")
+        const [addCategorie, setAddCategorie] = useState(false)
 
-          const [content, setContent] = useState('livre')
+        const { user, isLoading } = useAuth({middleware : "auth"})
+        
+        const { livres, commentaires, categories } = useData()
 
-          const { user, isLoading } = useAuth({middleware : "auth"})
 
-        const { livres } = useData()
 
         const { classes } = useStyles();
 
@@ -150,27 +134,33 @@ export default function profile() {
 
             return filter
        };
-      //  const FilterDataLivreCommenter = () => {
 
-      //   const filter = livres.filter((x) => x.livre_id === user.id)
-      // };
+    
+       const FilterDataLivreCommenter = () => {
+
+        const filter = commentaires?.filter((x) => x.user_id === user.id)
+
+        return filter
+      };
   
       if(isLoading || !user) {
 
           return <>Changerment ...</> 
         }
-     
+
      return (
         <div className='profile_page'>
           <header>
-          <Navbar height={700} width={{ sm: 300 }} p="md" className={classes.navbar}>
+          <Navbar width={{ sm: 300 }} p="md" className={classes.navbar}>
                     <Navbar.Section className={classes.section}>
-                    {/* <UserButton
-                         image="https://i.imgur.com/fGxgcDF.png"
-                         name="Bob Rulebreaker"
-                         email="Product owner"
-                         icon={<IconSelector size="0.9rem" stroke={1.5} />}
-                    /> */}
+                        <div className='profil_user_div'>
+                          <div className='photo'>
+                            {user.nom[0]}
+                          </div>
+                          <div className='nom_prenom'>
+                            <p>{user?.nom + ' ' + user?.prenom}</p>
+                          </div>
+                        </div>
                     </Navbar.Section>
 
                     <TextInput
@@ -206,8 +196,7 @@ export default function profile() {
                               <p className='theme'>Creer un livre</p>
                           </div>
                             <Badge size="sm" variant="filled" className={classes.mainLinkBadge}>
-         
-                              12
+                              50
                             </Badge>
                           </UnstyledButton>
                         </div>
@@ -220,7 +209,7 @@ export default function profile() {
                               <p className='theme'>Les livres commentés</p>
                           </div>
                             <Badge size="sm" variant="filled" className={classes.mainLinkBadge}>
-                              12
+                              { FilterDataLivreCommenter() ? FilterDataLivreCommenter().length : "Loading ..." }
                             </Badge>
                           </UnstyledButton>
                         </div>
@@ -241,25 +230,36 @@ export default function profile() {
 
                     <Navbar.Section className={classes.section}>
                     <Group className={classes.collectionsHeader} position="apart">
-                         <Text size="xs" weight={500} color="dimmed">
+                         <Text size="1.1rem" weight={500} color="dimmed">
                          Categories
                          </Text>
-                         <Tooltip label="Create collection" withArrow position="right">
+                         <Tooltip label="Creer une categorie" onClick={() => setAddCategorie(true)} withArrow position="right">
                          <ActionIcon variant="default" size={18}>
                          <IconPlus size="0.8rem" stroke={1.5} />
                          </ActionIcon>
                          </Tooltip>
                     </Group>
-                    {/* <div className={classes.collections}>{collectionLinks}</div> */}
+                    {
+                      categories?.map((categorie, index) => {
+                          return (
+                            <div className={classes.collections} key={index}>
+                              <p className={classes.collectionLink}>
+                                {categorie.nom}
+                              </p>
+                            </div>
+                          )
+                      })
+                    }
                     </Navbar.Section>
                </Navbar>
           </header>
          <section>
           {
             content === "livre" && <LivreUser livres={FilterDataLivre()} /> }
-           { content === "creer" && <AddLivre /> }
-           { content === "commenter" && <Livres livres = {FilterDataLivre()} /> }
+           { content === "creer" && <AddLivre close={() => setContent('livre')} /> }
+           { content === "commenter" &&  <LivreUser livres={FilterDataLivreCommenter()} />}
            { content === "stats" && <Livres /> }
+           { addCategorie && <AddCategorie close={() => setAddCategorie(false)} /> }
           
          </section>
         </div>

@@ -7,7 +7,7 @@ import Link from 'next/link';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import { useSelector } from 'react-redux';
+import useData from '../Hooks/data'
 import { AiOutlineComment } from "react-icons/ai"
 import { useRouter } from 'next/router';
 import { useAuth } from '@/Hooks/auth';
@@ -16,7 +16,7 @@ import Commentaire from './Commentaire';
 
 const NouvelSortie = () => {
 
-     const { livres } = useSelector(item => item.livres)
+     const { livres } = useData()
      const [active, setActive] = useState(false)
      const [idLivre, setIdLivre] = useState()
 

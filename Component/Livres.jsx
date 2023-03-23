@@ -1,33 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import Commentaire from "../Component/Commentaire"
+import React from 'react';
 import CardLivre from "../Component/CardLivre"
-import axios from '@/Lib/axios';
-import { useSelector } from 'react-redux';
 import Link from 'next/link';
+import useData from '@/Hooks/data';
 
 const Livres = () => {
 
-     const { livres } = useSelector(item => item.livres)
-
-
-     const [active, setActive] = useState(false)
-     const [categories, setCategories] = useState([])
-     const [filter, setFilter] = useState(livres)
-
-
-    
-
-
-     useEffect(() => {
-
-          (async() => {
-
-               const response = await axios.get("/api/categories/liste-categorie")
-
-               setCategories(response.data.categories)
-          })()
-     }, [])
-
+     const { livres } = useData()
 
      return (
           <div className='container_livres'>
@@ -52,7 +30,6 @@ const Livres = () => {
                          <Link href={"/Livres"} className='voir'>Plus de livres</Link>
                     </div>
                </div>
-               {active && <Commentaire close={() => setActive(false)} /> }
           </div>
      );
 };

@@ -1,10 +1,44 @@
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import { AiOutlineComment, AiOutlineDelete } from "react-icons/ai"
-import Cover from "../Assets/c4.jpg"
 import { GrUpdate } from "react-icons/gr"
+import { useRouter } from 'next/router';
+import { useAuth } from '../Hooks/auth';
+import Commentaire from './Commentaire';
+import axios from '../Lib/axios';
+import AddLivre from './AddLivre';
 
 const LivreUser = ({livres}) => {
+
+     
+     const [active, setActive] = useState(false)
+     const [id, setId] = useState()
+     const { user } = useAuth()
+
+     const [add, setAdd] = useState(false)
+
+     const router = useRouter()
+
+     const supprimerLivre = async(id) => {
+
+          await axios.delete('/api/livres/delete-livre/'+ id).then((response) => {
+          //     if(response.data.status == 200) {
+          //        alert('Element supprimer avec succes')
+          //     }
+          })
+      } 
+
+
+     const VoirComment = (id) => {
+          setActive(true)
+          setId(id)
+     }
+
+     if(active && !user) {
+                    
+          router.push('/Auth/login')
+     }
+
      return (
           <div className='livre_user'>
                <div className='intitule'>
@@ -12,7 +46,7 @@ const LivreUser = ({livres}) => {
                          <p>Mes livres créés</p>
                    </div>
                    <div className='add_book'>
-                         <button>
+                         <button onClick={() => setAdd(true)}>
                               Ajouter un livre
                          </button>
                    </div>
@@ -21,35 +55,39 @@ const LivreUser = ({livres}) => {
                     {
                          livres?.map((livre, index) => {
                               return (
-
+                              <>
                               <div className='card_user_livre' key={index}>
-                                   <div className="cover_image">
-                                        <Image loader={() => `http://127.0.0.1:8000/${livre.cover}`} src={livre ? `http://127.0.0.1:8000/${livre?.cover}` : 'Chargement'} width={10} height={10} alt='Image de couverture du livre' priority className='image' />
+                                   <div className="cover_image" onClick={() => VoirComment(livre.id)}>
+                                        <Image loader={() => `http://127.0.0.1:8000/${livre.cover}` || `http://127.0.0.1:8000/${livre?.livre?.cover}`} src={livre ? `http://127.0.0.1:8000/${livre?.cover}` || `http://127.0.0.1:8000/${livre?.livre?.cover}` : 'Chargement'} width={10} height={10} alt='Image de couverture du livre' priority className='image' />
                                    </div>
                                    <div className="categorie_div">
                                         {
-                                             livre.categorie.nom
+                                             livre.categorie?.nom
                                         }
                                    </div>
                                    <div className='info_livre'>
-                                        <p>{livre.auteur}</p>
-                                        <p className='livre'>{livre.titre}</p>
+                                        <p>{livre.auteur || livre.livre.auteur}</p>
+                                        <p className='livre'>{livre.titre || livre.livre.titre}</p>
                                    </div>
                                    <div className='action_livre'>
-                                        <div className='commenter'>
+                                        <div className='commenter' onClick={() => VoirComment(livre.id)}>
                                              <AiOutlineComment />
                                         </div>
                                         <div className='update'>
                                              <GrUpdate />
                                         </div>
-                                        <div className='delete'>
+                                        <div className='delete' onClick={() => supprimerLivre(livre.id)}>
                                              <AiOutlineDelete />
                                         </div>
                                    </div>
                               </div>
+                         </>
                               )
                          })
                     }
+                
+                          { active && user && <Commentaire id={id} close={() => setActive(false)} /> }
+                     { add && <AddLivre close={() => setAdd(false)} /> }
                </div>
           </div>
      );

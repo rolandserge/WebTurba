@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
 import Image from "next/image"
 import CardLivre from "../../Component/CardLivre"
-import { useSelector } from "react-redux"
 import useSWR from "swr"
 import axios from '../../Lib/axios';
+import useData from '../../Hooks/data';
 
 const index = () => {
 
-     const { livres } = useSelector(item => item.livres)
+     const { livres, categories } = useData()
 
      const [change, setChange] = useState()
+     
      const [filter, setFilter] = useState(livres)
-
-     const { data: categories, error, mutate} = useSWR("/api/categories/liste-categorie", () => 
-          axios.get('/api/categories/liste-categorie')
-          .then((response) => response.data.categories)
-     )
+     
      
      const changeClasse = (index) => {
           if(index === change) {
@@ -69,7 +66,7 @@ const index = () => {
                     </div>
                     <div className="livres_cards_listes">
                     {
-                         filter.length > 1 ? filter.map((livre, index) => {
+                         typeof filter === 'undefined' ? livres?.map((livre, index) => {
 
                               return (
 
@@ -77,7 +74,13 @@ const index = () => {
                               )
                          }) :
 
-                              'Aucun livre trouver'
+                              filter?.map((livre, index) => {
+
+                                   return (
+
+                                        <CardLivre livres={livre} key={index} />
+                                   )
+                              })
                          }
                     </div>
                     

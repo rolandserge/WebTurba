@@ -9,16 +9,22 @@ const useData = () => {
                     .then( response => response.data.livres)
           )
 
-     const { data: commentaires , errors, mutate} = useSWR("/api/commentaires/liste-commentaire", () => 
+     const { data: commentaires , errors} = useSWR("/api/commentaires/liste-commentaire", () => 
           axios.get('/api/commentaires/liste-commentaire')
                .then( response => response.data.commentaires)
      )
 
+     const { data: categories } = useSWR("/api/categories/liste-categorie", () => 
+          axios.get('/api/categories/liste-categorie')
+     .then((response) => response.data.categories)
+)
      
 
      return {
 
-          livres
+          livres,
+          commentaires,
+          categories
      }
 };
 

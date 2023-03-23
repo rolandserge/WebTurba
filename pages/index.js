@@ -15,21 +15,6 @@ import useSWR  from 'swr';
 
 export default function Home() {
 
-//   const [check, setCheck] = useState(false)
-  
-  const dispatch =  useDispatch()
-  
-
-
-    const supprimerLivre = async(id) => {
-
-        await axios.delete('/api/livres/delete-livre/'+ id).then((response) => {
-            if(response.data.status == 200) {
-                dispatch(deleteLivre(id))
-            }
-        })
-    } 
-
   return (
     <div>
         <section>
