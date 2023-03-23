@@ -123,7 +123,7 @@ export default function profile() {
 
         const { user, isLoading, logout } = useAuth({middleware : "auth"})
         
-        const { livres, commentaires, categories } = useData()
+        const { livres, categories } = useData()
         const router = useRouter()
 
 

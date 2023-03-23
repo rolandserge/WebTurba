@@ -1,38 +1,31 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { BiSend } from "react-icons/bi";
 import Image from "next/image"
 import axios from '@/Lib/axios';
 import { useAuth } from '@/Hooks/auth';
-import useSWR  from 'swr';
+import useData from '@/Hooks/data';
 
 
 const Commentaire = ({close, id}) => {
 
-    const [livre, setLivre] = useState()
-    // const [commentaires, setcommentaires] = useState([])
-
     const messageRef = useRef()
 
     const { user } = useAuth()
+    const { livres, commentaires } = useData()
 
+    const FilterLivre = () => {
 
-    const { data: commentaire, error, mutate} = useSWR(`/api/livres/show-livre/${id}`, () => 
-            axios.get(`/api/livres/show-livre/${id}`)
-        .then( (response) => response.data.commentaires)
-    )
+      const filter = livres?.filter((x) => x.id === id)
 
+      return filter[0]
+    }
 
-    useEffect(() => {
+    const FilterCommentaires = () => {
 
-        (async() => {
+      const filter = commentaires?.filter((x) => x.livre_id === id)
 
-            axios.get('/api/livres/show-livre/'+ id).then((res) => {
-              setLivre(res.data.livre)
-              // setcommentaires(res.data.commentaires)
-            })
-        })()
-
-    }, [])
+      return filter
+    }
 
     const AddCommentaire = (event) => {
 
@@ -43,20 +36,18 @@ const Commentaire = ({close, id}) => {
       axios.post('/api/commentaires/add-commentaire', {evaluation: 10, message: message, user: user.id, livre: id}).then(res => {
         if(res.data.status == 200) {
           
-          // alert(res.data.message)
           messageRef.current.value = ''
         }
       })
       
     }
-    // console.log(commentaire);
-    // console.log(livre);
+
      return (
           <div className='commentaire_container'>
                <div className='commentaire_div'>
                     <div className='entete'>
                          <div className='pub'>
-                              <p>La publication de {livre?.user?.nom + " " + livre?.user?.prenom}</p>
+                              <p>La publication de {FilterLivre()?.user?.nom + " " + FilterLivre()?.user?.prenom}</p>
                          </div>
                          <div className='close' onClick={close}>
                               <p>X</p>
@@ -65,39 +56,39 @@ const Commentaire = ({close, id}) => {
                     <div className="card_livre">
                       <div className='header_livre'>
                         <div className='profil_photo'>
-                          <p>{livre?.user?.nom[0]}</p>
+                          <p>{FilterLivre()?.user?.nom[0]}</p>
                         </div>
                         <div className='user_info'>
-                          <p>{ livre?.user?.nom + " " + livre?.user?.prenom }</p>
-                          <span>Publié le {livre?.created_at}</span>
+                          <p>{ FilterLivre()?.user?.nom + " " + FilterLivre()?.user?.prenom }</p>
+                          <span>Publié le {FilterLivre()?.created_at}</span>
                         </div>
                       </div>
                       <div className='contenu_livre'>
                         <div className='info_livre'>
-                          <p>Titre du livre : <span>{livre?.titre}</span></p>
-                          <p>Auteur du livre : <span>{livre?.auteur}</span></p>
-                          <p>Categorie du livre : <span>{livre?.categorie?.nom}</span></p>
+                          <p>Titre du livre : <span>{FilterLivre()?.titre}</span></p>
+                          <p>Auteur du livre : <span>{FilterLivre()?.auteur}</span></p>
+                          <p>Categorie du livre : <span>{FilterLivre()?.categorie?.nom}</span></p>
                         </div>
                         <div className='description_livre'>
                            <p>
                            {
-                            livre?.description
+                            FilterLivre()?.description
                            }
                            </p>
                         </div>
                       </div>
                       <div className='cover_image'>
-                          <Image loader={() => `http://127.0.0.1:8000/${livre?.cover}`} src={`http://127.0.0.1:8000/${livre?.cover}`} width="10" height={10} alt='Image de couverture de livre' className='image' />
+                          <Image loader={() => `http://127.0.0.1:8000/${FilterLivre()?.cover}`} src={`http://127.0.0.1:8000/${FilterLivre()?.cover}`} width="10" height={10} alt='Image de couverture de livre' className='image' />
                       </div>
                       <div className='liste_commentaire'>
                         {
-                          commentaire?.length == 0 ? "Pas de commentaire pour ce livre" :
+                          FilterCommentaires()?.length == 0 ? "Pas de commentaire pour ce livre" :
                         <>
                           <div className='titre'>
                             <p>Liste des commentaire du livre</p>
                           </div>
                           {
-                            commentaire?.map((commentaire, index) => {
+                            FilterCommentaires()?.map((commentaire, index) => {
 
                               return (
 

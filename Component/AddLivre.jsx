@@ -38,7 +38,7 @@ const AddLivre = ({close}) => {
 
                     titreRef.current.value = ""
                     auteurRef.current.value = ""
-                    coverRef.current.files[0] = ''
+                    coverRef.current.value = ''
                     descriptionRef.current.value = ""
                     categorieRef.current.value = ""
                } 

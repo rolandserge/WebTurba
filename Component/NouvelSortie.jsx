@@ -57,7 +57,7 @@ const NouvelSortie = () => {
                               className='cards_nouvelle'
                          >
                               {
-                                   livres?.map((livre, index) => {
+                                   livres?.slice(0, 6).map((livre, index) => {
 
                                         return (
                                              <>
@@ -68,6 +68,9 @@ const NouvelSortie = () => {
                                                             <Link href={"#"} onClick={() => CheckLivre(livre.id)}>
                                                                  <Image loader={() => `http://127.0.0.1:8000/${livre.cover}`} src={livre ? `http://127.0.0.1:8000/${livre.cover}` : ''} width={10} height={10} alt="Image de couverture" className='image' />
                                                             </Link>
+                                                       </div>
+                                                       <div className='categorie_div'>
+                                                            <p>{livre?.categorie.nom}</p>
                                                        </div>
                                                        <div className='infos_livre'>
                                                             <p>{livre.auteur}</p>
