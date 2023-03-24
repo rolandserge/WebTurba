@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import Livres from "../../Component/livres";
 import { BiBookAdd, BiCommentCheck } from "react-icons/bi"
 import { MdLibraryBooks, MdOutlineLogout } from "react-icons/md"
-import { TbChartInfographic } from "react-icons/tb"
-import { createStyles, Navbar, TextInput, Code, UnstyledButton, Badge, Text, Group, ActionIcon, Tooltip, rem} from '@mantine/core';
-import { IconSearch, IconPlus } from '@tabler/icons-react'
+import { createStyles, Navbar, UnstyledButton, Badge, Text, Group, ActionIcon, Tooltip, rem} from '@mantine/core';
+import { IconPlus } from '@tabler/icons-react'
 import LivreUser from '../../Component/LivreUser';
 import { useAuth } from '../../Hooks/auth';
 import AddLivre from '../../Component/AddLivre';

@@ -3,17 +3,16 @@ import {createSlice} from "@reduxjs/toolkit"
 export const livresSlice = createSlice({
      name: 'livres',
      initialState: {
-          "livres": [],
-          'livre' : null
+          "commentaires": [],
      },
      reducers: {
-          listeLivre: (state, action) => {
+          ListeCommentaires: (state, action) => {
 
-               state.livres = action.payload
+               state.commentaires = action.payload
           },
-          ajoutLivre: (state, {payload}) => {
+          AjoutCommentaires: (state, {payload}) => {
 
-               state.livres.push(payload)
+               state.commentaires.push(payload)
           },
           editLivre : (state, {payload}) => {
 
@@ -29,9 +28,6 @@ export const livresSlice = createSlice({
                     }
                })
           },
-          unLivre : (state, {payload}) => {
-               state.livre = state.livres.filter((livre) => livre.id == payload)
-          },
 
           deleteLivre : (state, {payload}) => {
 
@@ -40,6 +36,6 @@ export const livresSlice = createSlice({
      },
 })
 
-export const { listeLivre, ajoutLivre, editLivre, deleteLivre, unLivre } = livresSlice.actions
+export const { ListeCommentaires, AjoutCommentaires, editLivre, deleteLivre, unLivre } = livresSlice.actions
 
 export default livresSlice.reducer

@@ -56,7 +56,7 @@ const EditLivre = ({id, close}) => {
           formData.append("categorie", categorie)
           formData.append('_method', 'PATCH');
 
-          axios.post(`/api/livres/update-livre/${id}`, formData)
+          await axios.post(`/api/livres/update-livre/${id}`, formData)
           .then((res) => {
                if(res.data.status == 200) {
                     alert(res.data.message)

@@ -4,28 +4,35 @@ import Image from "next/image"
 import axios from '@/Lib/axios';
 import { useAuth } from '@/Hooks/auth';
 import useData from '@/Hooks/data';
+import { useDispatch, useSelector } from 'react-redux';
+import { AjoutCommentaires } from '@/slices/livresSlice';
 
 
 const Commentaire = ({close, id}) => {
 
     const messageRef = useRef()
 
+    const dispatch = useDispatch()
+
     const { user } = useAuth()
-    const { livres, commentaires } = useData()
+    const { livres } = useData()
+
+    const { commentaires } = useSelector(item => item.livres)
 
     const FilterLivre = () => {
-
+      
       const filter = livres?.filter((x) => x.id === id)
-
+      
       return filter[0]
     }
 
-    const FilterCommentaires = () => {
+    // const FilterCommentaires = () => {
+      
+    //   const filter = commentaires?.filter((x) => x.livre_id === id)
+      
+    //   return filter
+    // }
 
-      const filter = commentaires?.filter((x) => x.livre_id === id)
-
-      return filter
-    }
 
     const AddCommentaire = (event) => {
 
@@ -33,9 +40,10 @@ const Commentaire = ({close, id}) => {
 
       const message = messageRef.current.value
 
+
       axios.post('/api/commentaires/add-commentaire', {evaluation: 10, message: message, user: user.id, livre: id}).then(res => {
         if(res.data.status == 200) {
-          
+          dispatch(AjoutCommentaires(res.data.commentaire[0]))
           messageRef.current.value = ''
         }
       })
@@ -82,13 +90,15 @@ const Commentaire = ({close, id}) => {
                       </div>
                       <div className='liste_commentaire'>
                         {
-                          FilterCommentaires()?.length == 0 ? "Pas de commentaire pour ce livre" :
+                          commentaires?.filter((x) => x.livre_id === id).length == 0 ? "Pas de commentaire pour ce livre" :
                         <>
                           <div className='titre'>
                             <p>Liste des commentaire du livre</p>
                           </div>
                           {
-                            FilterCommentaires()?.map((commentaire, index) => {
+                            commentaires?.
+                            filter((x) => x.livre_id == id)
+                            .sort((a, b) => a.id < b.id ? 1 : -1).map((commentaire, index) => {
 
                               return (
 

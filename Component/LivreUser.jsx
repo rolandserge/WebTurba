@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { AiOutlineComment, AiOutlineDelete } from "react-icons/ai"
+import { FaRegEdit } from "react-icons/fa"
 import { GrUpdate } from "react-icons/gr"
 import { useRouter } from 'next/router';
 import { useAuth } from '../Hooks/auth';
@@ -26,7 +27,7 @@ const LivreUser = ({livres}) => {
 
      const supprimerLivre = async(id) => {
 
-          await axios.delete('/api/livres/delete-livre/'+ id)
+          await axios.delete(`/api/livres/delete-livre/${id}`)
       } 
 
      const VoirComment = (id) => {
@@ -78,7 +79,7 @@ const LivreUser = ({livres}) => {
                                              <AiOutlineComment />
                                         </div>
                                         <div className='update' onClick={() => ModifierLivre(livre.id)}>
-                                             <GrUpdate />
+                                             <FaRegEdit />
                                         </div>
                                         <div className='delete' onClick={() => supprimerLivre(livre.id)}>
                                              <AiOutlineDelete />

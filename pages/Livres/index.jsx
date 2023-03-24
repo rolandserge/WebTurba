@@ -22,10 +22,10 @@ const index = () => {
           setChange(index)
 
           if(index == -1) {
-               const filter = livres.filter((x) => x.id != index)
+               const filter = livres?.filter((x) => x.id != index)
                setFilter(filter)
           } else {
-               const filter = livres.filter((x) => x.categorie_id === index)
+               const filter = livres?.filter((x) => x.categorie_id === index)
                setFilter(filter)
           }
      };
@@ -33,9 +33,8 @@ const index = () => {
      var keys = ['titre','categorie.nom', 'auteur']
      
      const rechercheFiltre = (livres) => {
-          return livres.filter((livre) => keys.some((key) => String(livre[key]).toLowerCase().includes(search.toLowerCase())))
+          return livres?.filter((livre) => keys.some((key) => String(livre[key]).toLowerCase().includes(search.toLowerCase())))
      }
-
 
      return (
           <div className='lecture_image'>
@@ -72,15 +71,19 @@ const index = () => {
                     </div>
                     <div className="livres_cards_listes">
                     {
-                         search ? rechercheFiltre(livres).map((livre, index) => {
+                         search && rechercheFiltre(livres).length == 0 ? 'Aucun livre trouver' :
+                         
+                         search && rechercheFiltre(livres).map((livre, index) => {
 
                               return (
                               
                                    <CardLivre livres={livre} key={index} />
                               ) 
-                         }) 
 
-                         :
+                         })
+
+                         ||
+
                          typeof filter === 'undefined' ? livres?.map((livre, index) => {
 
                               return (
@@ -89,13 +92,16 @@ const index = () => {
                               )
                          }) :
 
-                              filter?.map((livre, index) => {
+                         filter?.length == 0 ? "Aucun livre n'est associé a cette categorie" 
 
-                                   return (
+                         : filter?.map((livre, index) => {
 
-                                        <CardLivre livres={livre} key={index} />
-                                   )
-                              })
+                              return (
+
+                                   <CardLivre livres={livre} key={index} />
+                              )
+                         })
+                    
                          }
                     </div>
                     
