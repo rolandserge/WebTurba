@@ -6,6 +6,8 @@ import { useAuth } from '@/Hooks/auth';
 import useData from '@/Hooks/data';
 import { useDispatch, useSelector } from 'react-redux';
 import { AjoutCommentaires } from '@/slices/livresSlice';
+import moment from "moment"
+import "moment/locale/fr"
 
 
 const Commentaire = ({close, id}) => {
@@ -25,14 +27,6 @@ const Commentaire = ({close, id}) => {
       
       return filter[0]
     }
-
-    // const FilterCommentaires = () => {
-      
-    //   const filter = commentaires?.filter((x) => x.livre_id === id)
-      
-    //   return filter
-    // }
-
 
     const AddCommentaire = (event) => {
 
@@ -68,7 +62,7 @@ const Commentaire = ({close, id}) => {
                         </div>
                         <div className='user_info'>
                           <p>{ FilterLivre()?.user?.nom + " " + FilterLivre()?.user?.prenom }</p>
-                          <span>Publié le {FilterLivre()?.created_at}</span>
+                          <span>Publié {moment(FilterLivre()?.created_at).locale("fr").calendar()}</span>
                         </div>
                       </div>
                       <div className='contenu_livre'>
@@ -108,7 +102,7 @@ const Commentaire = ({close, id}) => {
                                   </div>
                                   <div className='messages'>
                                       <p>{commentaire.user.nom + ' ' + commentaire.user.prenom}</p>
-                                      <span>Publie le {commentaire.created_at}</span>
+                                      <span>Publié {moment(commentaire.created_at).locale("fr").calendar()}</span>
                                       <div className='message'>
                                         <p>
                                           {

@@ -73,7 +73,7 @@ const NouvelSortie = () => {
                                                             <p>{livre?.categorie.nom}</p>
                                                        </div>
                                                        <div className='infos_livre'>
-                                                            <p>{livre.auteur}</p>
+                                                            <p className='auteur'>{livre.auteur}</p>
                                                             <p>{livre.titre}</p>
                                                        </div>
                                                        <div className='info_user'>

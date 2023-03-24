@@ -357,17 +357,7 @@ body {
   border-radius: 5px;
   width: 95%;
 }
-.swiper-button-prev {
-  width: 10px;
-  height: 10px;
-}
-.swiper-button-prev::after {
-  color: black;
-}
-.swiper-button-next::after {
-  color: black;
-  position: relative;
-}
+
 .container_sortie .sortie_card .cards_nouvelle .card_sortie .image_cover {
   height: 40vh;
   overflow: hidden;
@@ -384,6 +374,10 @@ body {
 }
 .container_sortie .sortie_card .cards_nouvelle .card_sortie .infos_livre {
   padding: 0.5em;
+}
+.container_sortie .sortie_card .cards_nouvelle .card_sortie .infos_livre .auteur {
+  color: gray;
+  font-size: 0.85em;
 }
 .container_sortie .sortie_card .cards_nouvelle .card_sortie .info_user {
   display: flex;

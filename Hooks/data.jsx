@@ -15,7 +15,7 @@ const useData = () => {
 
      const { data: commentaires , errors} = useSWR("/api/commentaires/liste-commentaire", () => 
           axios.get('/api/commentaires/liste-commentaire')
-               .then( response => response.data.commentaires)
+               .then( response => dispatch(ListeCommentaires(response.data.commentaires)))
      )
 
      const { data: categories } = useSWR("/api/categories/liste-categorie", () => 
@@ -23,18 +23,9 @@ const useData = () => {
      .then((response) => response.data.categories)
      )
 
-     useEffect(() => {
-
-          axios.get('/api/commentaires/liste-commentaire')
-          .then(res => dispatch(ListeCommentaires(res.data.commentaires)))
-
-     }, [])
-     
-
      return {
 
           livres,
-          commentaires,
           categories
      }
 };
