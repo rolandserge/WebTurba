@@ -1364,6 +1364,10 @@ a {
 
 
 /* Page des livre uniquement */
+.lecture_image {
+  padding-top: 5rem;
+
+}
 .lecture_image .image_livre {
   height: 70vh;
   background-image: url('../Assets/lecture.jpg');
