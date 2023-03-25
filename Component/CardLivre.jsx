@@ -3,24 +3,11 @@ import Image from "next/image"
 import { AiOutlineComment } from "react-icons/ai"
 import Link from "next/link"
 import Commentaire from './Commentaire';
-import { useAuth } from '@/Hooks/auth';
-import { useRouter } from 'next/router';
 
 
 const CardLivre = ({livres}) => {
 
      const [active, setActive] = useState(false)
-
-     const { user } = useAuth()
-
-     const router = useRouter()
-
-
-
-     if(active && !user) {
-                    
-          router.push('/Auth/login')
-     }    
 
      return (
           <>
@@ -52,10 +39,9 @@ const CardLivre = ({livres}) => {
                     </div>
                </div> 
                {
-                    active && user && <Commentaire id={livres.id} close={() => setActive(false)} /> 
+                    active && <Commentaire id={livres.id} close={() => setActive(false)} /> 
                     
                }
-               
           </>
      );
 };

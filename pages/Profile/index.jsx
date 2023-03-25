@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BiBookAdd, BiCommentCheck } from "react-icons/bi"
+import { BiBookAdd } from "react-icons/bi"
 import { MdLibraryBooks, MdOutlineLogout } from "react-icons/md"
 import { createStyles, Navbar, UnstyledButton, Badge, Text, Group, ActionIcon, Tooltip, rem} from '@mantine/core';
 import { IconPlus } from '@tabler/icons-react'
@@ -159,7 +159,7 @@ export default function profile() {
                               <UnstyledButton className={classes.mainLink}>
                             <div className={classes.mainLinkInner}>
                               <div className={classes.mainLinkIcon}>
-                                <MdLibraryBooks />
+                                <BiBookAdd />
                               </div>
                               <p className='theme'>Mes livres crées</p>
                           </div>
@@ -172,12 +172,12 @@ export default function profile() {
                                   <UnstyledButton className={classes.mainLink}>
                             <div className={classes.mainLinkInner}>
                               <div className={classes.mainLinkIcon}>
-                                  <BiCommentCheck />
+                                  <BiBookAdd />
                               </div>
                               <p className='theme'>Tous les livres</p>
                           </div>
                             <Badge size="sm" variant="filled" className={classes.mainLinkBadge}>
-                              {livres ? Object.keys(livres).length : "Loading ..." }
+                              {livres ? Object.keys(livres).length : "09" }
                             </Badge>
                           </UnstyledButton>
                         </div>
@@ -185,7 +185,7 @@ export default function profile() {
                                   <UnstyledButton className={classes.mainLink}>
                             <div className={classes.mainLinkInner}>
                               <div className={classes.mainLinkIcon}>
-                                <BiBookAdd />
+                                <MdLibraryBooks />
                               </div>
                               <p className='theme'>Creer un livre</p>
                           </div>

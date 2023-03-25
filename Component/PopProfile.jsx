@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from "next/image"
 import logoutUser from "../Assets/logout.png"
 import Profil from "../Assets/utilisateur.png"
 import Ajouter from "../Assets/ajouter.png"
 import Livre from "../Assets/livre-ouvert.png"
 import Link from 'next/link';
+import AddLivre from "../Component/AddLivre"
 import { useAuth } from '@/Hooks/auth';
 
 const PopProfile = ({close}) => {
 
      const { logout } = useAuth()
+     const [add, setAdd] = useState(false)
 
      return (
           <div className='container_pop' onMouseLeave={close}>
@@ -22,7 +24,7 @@ const PopProfile = ({close}) => {
                               <p>Mon profil</p>
                          </div>
                     </Link>
-                    <Link href='/' className="pop_card">
+                    <Link href='/' onClick={() => setAdd(true)} className="pop_card">
                          <div className='image_pop'>
                               <Image src={Ajouter} className='image' alt='image illustration' />
                          </div>
@@ -30,7 +32,7 @@ const PopProfile = ({close}) => {
                               <p>Ajouter un livre</p>
                          </div>
                     </Link>
-                    <Link href='/' className="pop_card">
+                    <Link href='/Profile' className="pop_card">
                          <div className='image_pop'>
                               <Image src={Livre} className='image' alt='image illustration' />
                          </div>
@@ -47,6 +49,9 @@ const PopProfile = ({close}) => {
                          </div>
                     </Link>
                </div>
+               {
+                    add && <AddLivre close={() => setAdd(false)} />
+               }
           </div>
      );
 };

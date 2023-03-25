@@ -9,8 +9,6 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import useData from '../Hooks/data'
 import { AiOutlineComment } from "react-icons/ai"
-import { useRouter } from 'next/router';
-import { useAuth } from '@/Hooks/auth';
 import Commentaire from './Commentaire';
 
 
@@ -20,20 +18,10 @@ const NouvelSortie = () => {
      const [active, setActive] = useState(false)
      const [idLivre, setIdLivre] = useState()
 
-     const { user } = useAuth()
-
-     const router = useRouter()
-
      const CheckLivre = (id) => {
           setIdLivre(id)
           setActive(true)
      }
-
-     if(active && !user) {
-                    
-          router.push('/Auth/login')
-     }    
-     
      
      return (
           <div className='container_sortie'>
@@ -43,11 +31,8 @@ const NouvelSortie = () => {
                     </div>
                     <div>
                          <Swiper
-                              // spaceBetween={10}
                               modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
                               slidesPerView={5}
-                              // navigation
-                              // pagination={{ clickable: true }}
                               autoplay={{
                                    delay: 2000,
                                    disableOnInteraction: false,
@@ -98,7 +83,7 @@ const NouvelSortie = () => {
                          </Swiper>
                          {
                              
-                              active && user && <Commentaire id={idLivre} close={() => setActive(false)} /> 
+                              active && <Commentaire id={idLivre} close={() => setActive(false)} /> 
                               
                          
                          }

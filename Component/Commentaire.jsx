@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { BiSend } from "react-icons/bi";
 import Image from "next/image"
 import axios from '@/Lib/axios';
+import { useRouter } from 'next/router';
 import { useAuth } from '@/Hooks/auth';
 import useData from '@/Hooks/data';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,8 +14,9 @@ import "moment/locale/fr"
 const Commentaire = ({close, id}) => {
 
     const messageRef = useRef()
-
     const dispatch = useDispatch()
+
+    const router = useRouter()
 
     const { user } = useAuth()
     const { livres } = useData()
@@ -34,13 +36,18 @@ const Commentaire = ({close, id}) => {
 
       const message = messageRef.current.value
 
+        if(user) {
 
-      axios.post('/api/commentaires/add-commentaire', {evaluation: 10, message: message, user: user.id, livre: id}).then(res => {
-        if(res.data.status == 200) {
-          dispatch(AjoutCommentaires(res.data.commentaire[0]))
-          messageRef.current.value = ''
+            axios.post('/api/commentaires/add-commentaire', {evaluation: 10, message: message, user: user.id, livre: id}).then(res => {
+            if(res.data.status == 200) {
+                dispatch(AjoutCommentaires(res.data.commentaire[0]))
+                messageRef.current.value = ''
+            }
+            })
+            
+        } else {
+            router.push('/Auth/login')
         }
-      })
       
     }
 

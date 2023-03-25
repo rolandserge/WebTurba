@@ -2,7 +2,6 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import { AiOutlineComment, AiOutlineDelete } from "react-icons/ai"
 import { FaRegEdit } from "react-icons/fa"
-import { GrUpdate } from "react-icons/gr"
 import { useRouter } from 'next/router';
 import { useAuth } from '../Hooks/auth';
 import Commentaire from './Commentaire';

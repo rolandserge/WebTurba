@@ -25,9 +25,6 @@ const UserAvis = () => {
                                    Lorem ipsum dolor sit amet consectetur
                               </p>
                          </div>
-                         <div className='voir_div'>
-                              <Link href='/'>Voir plus</Link>
-                         </div>
                     </div>
                     <div className="avis_card">
                          <div className='image_div'>
@@ -46,9 +43,6 @@ const UserAvis = () => {
                                    Lorem ipsum dolor sit amet consectetur
                               </p>
                          </div>
-                         <div>
-                              <Link href='/'>Voir plus</Link>
-                         </div>
                     </div>
                     <div className="avis_card">
                          <div className='image_div'>
@@ -66,9 +60,6 @@ const UserAvis = () => {
                                    Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.
                                    Lorem ipsum dolor sit amet consectetur
                               </p>
-                         </div>
-                         <div>
-                              <Link href='/'>Voir plus</Link>
                          </div>
                     </div>
                </div>
