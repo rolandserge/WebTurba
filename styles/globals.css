@@ -1542,3 +1542,87 @@ a {
   flex-direction: column;
   justify-content: space-around;
 }
+
+
+
+
+
+
+
+
+
+
+/* responsive */
+@media screen and (max-width: 1115px) {
+
+    /* navbar */
+    .navbar .lien {
+      /* border: 1px solid; */
+      width: 35%;
+    }
+
+    /* pop up profile */
+    .container_pop {
+      /* border: 1px solid; */
+      width: 20%;
+      right: 10rem;
+    }
+
+    /* header */
+    .container_header .card_header .bienvenu_div {
+      /* border: 1px solid; */
+      height: 44vh;
+    }
+
+    /* nouvelle sortie */
+    /* .container_sortie .sortie_card .cards_nouvelle {
+
+    }
+    .container_sortie .sortie_card .cards_nouvelle .card_sortie {
+      width: 90%;
+    } */
+
+
+    /* bienvenu style code */
+    .container_bienvenu .bienvenu_div .text_bienvenu {
+      height: 36vh;
+    }
+    .container_bienvenu .bienvenu_div .text_bienvenu .titre {
+      text-align: center;
+    }
+
+    /* card livre style code */
+    .livres_cards_listes .cards_livres {
+      width: 23.4%;
+    }
+    .livres_cards_listes .cards_livres .categorie_div {
+      width: 22.05%;
+    }
+    .livres_cards_listes .cards_livres .info_user .profil_user .profil {
+      width: 21.1%;
+    }
+
+
+    /* Avis user */
+    .container_avis .avis_cards .avis_card {
+      width: 32%;
+    }
+    .container_avis .avis_cards .avis_card .image_div .card_image {
+      width: 19%;
+      height: 8.4vh;
+    }
+
+
+    /* avis form style code */
+    .container_avis_form {
+      margin: 1em 0;
+    }
+    .container_avis_form .avis_div {
+      width: 70%;
+    }
+
+    /* Auth login style code */
+    .login_form form {
+      width: 40%;
+    }
+}

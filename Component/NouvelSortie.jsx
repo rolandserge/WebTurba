@@ -32,7 +32,7 @@ const NouvelSortie = () => {
                     <div>
                          <Swiper
                               modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-                              slidesPerView={5}
+                              slidesPerView={4}
                               autoplay={{
                                    delay: 2000,
                                    disableOnInteraction: false,
