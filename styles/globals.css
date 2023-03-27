@@ -654,11 +654,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   height: 65vh;
 }
 .container_avis_form .avis_div {
   display: flex;
   width: 60%;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 .container_avis_form .avis_div .avis_image {
@@ -904,6 +906,7 @@ body {
 .container_avis .avis_cards {
   display: flex;
   height: 50vh;
+  flex-wrap: wrap;
   margin: 0 2em;
   justify-content: space-around;
   align-items: center;
@@ -1571,7 +1574,7 @@ a {
     /* header */
     .container_header .card_header .bienvenu_div {
       /* border: 1px solid; */
-      height: 44vh;
+      min-height: 44vh;
     }
 
     /* nouvelle sortie */
@@ -1599,7 +1602,7 @@ a {
       width: 22.05%;
     }
     .livres_cards_listes .cards_livres .info_user .profil_user .profil {
-      width: 21.1%;
+      width: 20.9%;
     }
 
 
@@ -1625,4 +1628,112 @@ a {
     .login_form form {
       width: 40%;
     }
+}
+
+
+
+
+/* Petit ecran, ordinateurs */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  
+}
+
+
+
+
+/* ipad, tablette */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  
+
+  .navbar .lien {
+    /* border: 1px solid; */
+    width: 40%;
+  }
+  .navbar .lien .home_div {
+    /* border: 1px solid; */
+    width: 28%;
+  }
+
+  /* pop up profile */
+  .container_pop {
+    /* border: 1px solid; */
+    width: 20%;
+    right: 10rem;
+  }
+
+  /* header */
+  .container_header .card_header .bienvenu_div {
+    /* border: 1px solid; */
+    min-height: 44vh;
+  }
+
+  /* nouvelle sortie */
+  /* .container_sortie .sortie_card .cards_nouvelle {
+
+  } */
+  /* .container_sortie .sortie_card .cards_nouvelle .card_sortie {
+    width: 100%;
+  } */
+
+
+  /* bienvenu style code */
+  .container_bienvenu .bienvenu_div {
+    width: 95%;
+  }
+  .container_bienvenu .bienvenu_div .bienvenue_image {
+    width: 46%;
+  }
+  .container_bienvenu .bienvenu_div .text_bienvenu {
+    min-height: 43vh;
+    width: 50%;
+  }
+  .container_bienvenu .bienvenu_div .text_bienvenu .titre {
+    text-align: center;
+  }
+
+  /* card livre style code */
+  .container_livres .livres_div h2 {
+    width: 100%;
+  }
+  .livres_cards_listes .cards_livres {
+    width: 45%;
+  }
+  .livres_cards_listes .cards_livres .categorie_div {
+    width: 40.1%;
+  }
+  .livres_cards_listes .cards_livres .info_user .profil_user .profil {
+    width: 17%;
+  }
+
+
+  /* Avis user */
+  .container_avis .avis_cards .avis_card {
+    width: 40%;
+    flex-wrap: wrap;
+  }
+  .container_avis .avis_cards .avis_card .image_div .card_image {
+    width: 19%;
+    height: 8.4vh;
+  }
+
+
+  /* avis form style code */
+  .container_avis_form {
+    margin: 1em 0;
+  }
+  .container_avis_form .avis_div {
+    width: 70%;
+  }
+
+  /* Auth login style code */
+  .login_form form {
+    width: 54%;
+  }
+
+}
+
+
+/* les mobiles */
+@media screen and (min-width: 320px) and (max-width: 480px) {
+  
 }
